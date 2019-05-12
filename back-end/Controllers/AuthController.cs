@@ -35,13 +35,7 @@ namespace back_end.Controllers
                 return BadRequest(ModelState);
             }
 
-            var userToCreate = new User
-            {
-                Email = registerUserModel.Email,
-                Username = registerUserModel.Username
-            };
-
-            var result = await _authService.Register(userToCreate, registerUserModel.Password);
+            var result = await _authService.Register(registerUserModel);
 
             if (result.Error != null)
             {
@@ -59,7 +53,7 @@ namespace back_end.Controllers
                 return BadRequest(ModelState);
             }
 
-            var result = await _authService.Login(loginUserModel.Username, loginUserModel.Password);
+            var result = await _authService.Login(loginUserModel);
 
             if (result.Error != null)
             {
@@ -137,6 +131,24 @@ namespace back_end.Controllers
             if (result.Error != null)
             {
                 return Unauthorized(result);
+            }
+
+            return Ok(result);
+        }
+
+        [HttpPatch("changePassword")]
+        public async Task<IActionResult> ChangePassword(ChangePasswordModel changePasswordModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            var result = await _authService.ChangePassword(changePasswordModel);
+
+            if (result.Error != null)
+            {
+                return BadRequest(result);
             }
 
             return Ok(result);

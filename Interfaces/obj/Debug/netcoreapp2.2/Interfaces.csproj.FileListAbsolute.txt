@@ -64,3 +64,5 @@ C:\Users\Patryk\Documents\GitHub\PoradnikiBack\Interfaces\obj\Debug\netcoreapp2.
 C:\Users\Patryk\Documents\GitHub\PoradnikiBack\Interfaces\obj\Debug\netcoreapp2.2\Interfaces.csproj.CopyComplete
 C:\Users\Patryk\Documents\GitHub\PoradnikiBack\Interfaces\obj\Debug\netcoreapp2.2\Interfaces.dll
 C:\Users\Patryk\Documents\GitHub\PoradnikiBack\Interfaces\obj\Debug\netcoreapp2.2\Interfaces.pdb
+C:\Users\Patryk\Documents\GitHub\PoradnikiBack\Interfaces\bin\Debug\netcoreapp2.2\Microsoft.AspNetCore.Http.Features.dll
+C:\Users\Patryk\Documents\GitHub\PoradnikiBack\Interfaces\bin\Debug\netcoreapp2.2\Microsoft.AspNetCore.Http.Features.xml

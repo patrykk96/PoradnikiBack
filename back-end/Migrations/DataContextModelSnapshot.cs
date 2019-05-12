@@ -23,6 +23,8 @@ namespace back_end.Migrations
 
                     b.Property<bool>("ConfirmedAccount");
 
+                    b.Property<string>("Description");
+
                     b.Property<string>("Email");
 
                     b.Property<string>("LoginProvider");
@@ -31,7 +33,11 @@ namespace back_end.Migrations
 
                     b.Property<byte[]>("PasswordSalt");
 
+                    b.Property<string>("ProfileImage");
+
                     b.Property<string>("ProviderKey");
+
+                    b.Property<int>("Role");
 
                     b.Property<string>("Username");
 

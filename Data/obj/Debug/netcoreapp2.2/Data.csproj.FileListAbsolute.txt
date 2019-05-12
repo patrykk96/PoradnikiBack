@@ -43,3 +43,6 @@ C:\Users\Patryk\Documents\GitHub\PoradnikiBack\Data\obj\Debug\netcoreapp2.2\Data
 C:\Users\Patryk\Documents\GitHub\PoradnikiBack\Data\obj\Debug\netcoreapp2.2\Data.AssemblyInfo.cs
 C:\Users\Patryk\Documents\GitHub\PoradnikiBack\Data\obj\Debug\netcoreapp2.2\Data.dll
 C:\Users\Patryk\Documents\GitHub\PoradnikiBack\Data\obj\Debug\netcoreapp2.2\Data.pdb
+C:\Users\Patryk\Documents\GitHub\PoradnikiBack\Data\bin\Debug\netcoreapp2.2\Microsoft.AspNetCore.Http.Features.dll
+C:\Users\Patryk\Documents\GitHub\PoradnikiBack\Data\bin\Debug\netcoreapp2.2\Microsoft.AspNetCore.Http.Features.xml
+C:\Users\Patryk\Documents\GitHub\PoradnikiBack\Data\obj\Debug\netcoreapp2.2\Data.csproj.CopyComplete

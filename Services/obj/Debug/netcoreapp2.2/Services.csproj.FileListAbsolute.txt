@@ -65,3 +65,7 @@ C:\Users\Patryk\Documents\GitHub\PoradnikiBack\Services\obj\Debug\netcoreapp2.2\
 C:\Users\Patryk\Documents\GitHub\PoradnikiBack\Services\obj\Debug\netcoreapp2.2\Services.csproj.CopyComplete
 C:\Users\Patryk\Documents\GitHub\PoradnikiBack\Services\obj\Debug\netcoreapp2.2\Services.dll
 C:\Users\Patryk\Documents\GitHub\PoradnikiBack\Services\obj\Debug\netcoreapp2.2\Services.pdb
+C:\Users\Patryk\Documents\GitHub\PoradnikiBack\Services\bin\Debug\netcoreapp2.2\Microsoft.AspNetCore.Hosting.Abstractions.dll
+C:\Users\Patryk\Documents\GitHub\PoradnikiBack\Services\bin\Debug\netcoreapp2.2\Microsoft.AspNetCore.Http.Features.dll
+C:\Users\Patryk\Documents\GitHub\PoradnikiBack\Services\bin\Debug\netcoreapp2.2\Microsoft.AspNetCore.Hosting.Abstractions.xml
+C:\Users\Patryk\Documents\GitHub\PoradnikiBack\Services\bin\Debug\netcoreapp2.2\Microsoft.AspNetCore.Http.Features.xml

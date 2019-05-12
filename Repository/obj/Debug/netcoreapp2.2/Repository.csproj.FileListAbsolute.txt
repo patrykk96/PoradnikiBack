@@ -78,3 +78,5 @@ C:\Users\Patryk\Documents\GitHub\PoradnikiBack\Repository\obj\Debug\netcoreapp2.
 C:\Users\Patryk\Documents\GitHub\PoradnikiBack\Repository\obj\Debug\netcoreapp2.2\Repository.csproj.CopyComplete
 C:\Users\Patryk\Documents\GitHub\PoradnikiBack\Repository\obj\Debug\netcoreapp2.2\Repository.dll
 C:\Users\Patryk\Documents\GitHub\PoradnikiBack\Repository\obj\Debug\netcoreapp2.2\Repository.pdb
+C:\Users\Patryk\Documents\GitHub\PoradnikiBack\Repository\bin\Debug\netcoreapp2.2\Microsoft.AspNetCore.Http.Features.dll
+C:\Users\Patryk\Documents\GitHub\PoradnikiBack\Repository\bin\Debug\netcoreapp2.2\Microsoft.AspNetCore.Http.Features.xml

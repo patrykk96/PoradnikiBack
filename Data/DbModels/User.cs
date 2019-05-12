@@ -14,5 +14,8 @@ namespace Data.DbModels
         public bool ConfirmedAccount { get; set; }
         public string LoginProvider { get; set; }
         public string ProviderKey { get; set; }
+        public string ProfileImage { get; set; }
+        public string Description { get; set; }
+        public int Role { get; set; }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Data.DbModels;
 using Data.Dtos;
+using Data.Models;
 using Interfaces;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
@@ -27,34 +28,39 @@ namespace Services
             _config = config;
         }
 
-        public async Task<ResultDto<BaseDto>> Register(User user, string password)
+        public async Task<ResultDto<BaseDto>> Register(RegisterUserModel registerUserModel)
         {
             var result = new ResultDto<BaseDto>()
             {
                 Error = null
             };
 
-            var emailExists = await _repo.Exists(x => x.Email == user.Email);
+            var emailExists = await _repo.Exists(x => x.Email == registerUserModel.Email);
             if (emailExists)
             {
                 result.Error = "Podany adres email jest zajęty";
                 return result;
             }
 
-            var usernameExists = await _repo.Exists(x => x.Username == user.Username);
-            if (emailExists)
+            var usernameExists = await _repo.Exists(x => x.Username == registerUserModel.Username);
+            if (usernameExists)
             {
                 result.Error = "Podana nazwa użytkownika jest zajęta";
                 return result;
             }
 
             byte[] passwordHash, passwordSalt;
-            CreatePasswordHash(password, out passwordHash, out passwordSalt);
+            CreatePasswordHash(registerUserModel.Password, out passwordHash, out passwordSalt);
 
-            user.PasswordHash = passwordHash;
-            user.PasswordSalt = passwordSalt;
-            user.VerificationCode = Guid.NewGuid();
-            user.ConfirmedAccount = false;
+            var user = new User
+            {
+                Email = registerUserModel.Email,
+                Username = registerUserModel.Username,
+                PasswordHash = passwordHash,
+                PasswordSalt = passwordSalt,
+                VerificationCode = Guid.NewGuid(),
+                ConfirmedAccount = false
+            };
 
             _repo.Add(user);
             SendConfirmationEmail(user.Email, user.Username, user.VerificationCode);
@@ -101,16 +107,16 @@ namespace Services
             return false;
         }
 
-        public async Task<ResultDto<LoginDto>> Login(string username, string password)
+        public async Task<ResultDto<LoginDto>> Login(LoginUserModel loginUserModel)
         {
             var result = new ResultDto<LoginDto>
             {
                 Error = null
             };
 
-            var user = await _repo.GetSingleEntity(x => x.Username == username);
+            var user = await _repo.GetSingleEntity(x => x.Username == loginUserModel.Username);
 
-            if (user == null || !VerifyPasswordHash(password, user.PasswordHash, user.PasswordSalt))
+            if (user == null || !VerifyPasswordHash(loginUserModel.Password, user.PasswordHash, user.PasswordSalt))
             {
                 result.Error = "Nazwa użytkownika lub hasło niepoprawne";
                 return result;
@@ -293,7 +299,11 @@ namespace Services
                 {
                     responseResult = await response.Content.ReadAsStringAsync();
                 }
-                else throw new Exception("Błąd uwierzytelniania");
+                else
+                {
+                    result.Error = "Błąd uwierzytelniania";
+                    return result;
+                }
             };
 
             var epInfo = JsonConvert.DeserializeObject<Dictionary<string, string>>(responseResult);
@@ -343,6 +353,38 @@ namespace Services
             {
                 Token = token
             };
+
+            return result;
+        }
+
+        public async Task<ResultDto<BaseDto>> ChangePassword(ChangePasswordModel changePasswordModel)
+        {
+            var result = new ResultDto<BaseDto>()
+            {
+                Error = null
+            };
+
+            var user = await _repo.GetSingleEntity(x => x.Id == changePasswordModel.Id);
+
+            if (user == null)
+            {
+                result.Error = "Nie znaleziono użytkownika";
+                return result;
+            }
+
+            if (!VerifyPasswordHash(changePasswordModel.OldPassword, user.PasswordHash, user.PasswordSalt))
+            {
+                result.Error = "Stare hasło jest niepoprawne";
+                return result;
+            }
+
+            byte[] passwordHash, passwordSalt;
+            CreatePasswordHash(changePasswordModel.NewPassword, out passwordHash, out passwordSalt);
+
+            user.PasswordHash = passwordHash;
+            user.PasswordSalt = passwordSalt;
+
+            _repo.Update(user);
 
             return result;
         }
