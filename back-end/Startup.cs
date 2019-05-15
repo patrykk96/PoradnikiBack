@@ -39,6 +39,9 @@ namespace back_end
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IImageService, ImageService>();
+            services.AddScoped<IGameService, GameService>();
+            services.AddScoped<IGuideService, GuideService>();
+            services.AddScoped<IReviewService, ReviewService>();
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>

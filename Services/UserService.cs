@@ -68,6 +68,17 @@ namespace Services
                 return result;
             }
 
+            if (user.Username != editUserModel.Username)
+            {
+                bool exists = await _repo.Exists(x => x.Username == editUserModel.Username);
+
+                if (exists)
+                {
+                    result.Error = "Podana nazwa użytkownika jest już zajęta";
+                    return result;
+                }
+            }
+
             user.Username = editUserModel.Username;
             user.Description = editUserModel.Description;
 
@@ -83,14 +94,14 @@ namespace Services
             return result;
         }
 
-        public async Task<ResultDto<ImagePathDto>> SetUserAvatar(ImageModel imageModel)
+        public async Task<ResultDto<ImagePathDto>> SetUserAvatar(int id, ImageModel imageModel)
         {
             var result = new ResultDto<ImagePathDto>()
             {
                 Error = null
             };
 
-            var user = await _repo.GetSingleEntity(x => x.Id == imageModel.Id);
+            var user = await _repo.GetSingleEntity(x => x.Id == id);
 
             if (user == null)
             {
@@ -106,7 +117,7 @@ namespace Services
 
             var folderPath = _hostingEnvironment.WebRootPath + "\\uploads\\";
             if (!Directory.Exists(folderPath)) Directory.CreateDirectory(folderPath);
-            var fileName = Guid.NewGuid() + Path.GetExtension(imageModel.Image.FileName);
+            var fileName = id + Path.GetExtension(imageModel.Image.FileName);
             var filePath = Path.Combine(folderPath, fileName);
             using (FileStream fs = File.Create(filePath))
             {
@@ -114,7 +125,7 @@ namespace Services
                 fs.Flush();
             }
 
-            user.ProfileImage = @"http://localhost:8080/api/photo/" + $"{fileName}";
+            user.ProfileImage = @"https://localhost:44326/api/image/" + $"{fileName}";
 
             try
             {

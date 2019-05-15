@@ -7,7 +7,6 @@ namespace Data.Models
 {
     public class ImageModel
     {
-        public int Id { get; set; }
         public IFormFile Image { get; set; }
     }
 }

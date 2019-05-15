@@ -17,5 +17,8 @@ namespace Data.DbModels
         public string ProfileImage { get; set; }
         public string Description { get; set; }
         public int Role { get; set; }
+
+        public virtual ICollection<Guide> Guides { get; set; }
+        public virtual ICollection<Review> GameReviews { get; set; }
     }
 }

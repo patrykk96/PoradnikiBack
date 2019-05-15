@@ -47,9 +47,22 @@ namespace Repository
             await _context.SaveChangesAsync();
         }
 
-        public async Task<List<T>> GetAll(Expression<Func<T, bool>> func)
+        public async void Delete(T entity)
+        {
+            _dbSet.Remove(entity);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task<List<T>> GetAllBy(Expression<Func<T, bool>> func)
         {
             var list = await _dbSet.Where(func).ToListAsync();
+
+            return list;
+        }
+
+        public async Task<List<T>> GetAll()
+        {
+            var list = await _dbSet.ToListAsync();
 
             return list;
         }

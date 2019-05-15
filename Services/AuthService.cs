@@ -307,7 +307,7 @@ namespace Services
             };
 
             var epInfo = JsonConvert.DeserializeObject<Dictionary<string, string>>(responseResult);
-            var users = await _repo.GetAll(x => x.LoginProvider == "facebook");
+            var users = await _repo.GetAllBy(x => x.LoginProvider == "facebook");
             var user = await _repo.GetSingleEntity(x => x.ProviderKey == epInfo["id"]);
 
             if (user == null)

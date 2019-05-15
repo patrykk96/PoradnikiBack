@@ -16,6 +16,74 @@ namespace back_end.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "2.2.3-servicing-35854");
 
+            modelBuilder.Entity("Data.DbModels.Game", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Description");
+
+                    b.Property<string>("Image");
+
+                    b.Property<string>("Name");
+
+                    b.Property<double>("Rating");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Games");
+                });
+
+            modelBuilder.Entity("Data.DbModels.Guide", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("AuthorId");
+
+                    b.Property<string>("Content");
+
+                    b.Property<int>("GameId");
+
+                    b.Property<string>("Image");
+
+                    b.Property<string>("Name");
+
+                    b.Property<double>("Rating");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AuthorId");
+
+                    b.HasIndex("GameId");
+
+                    b.ToTable("Guide");
+                });
+
+            modelBuilder.Entity("Data.DbModels.Review", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("GameId");
+
+                    b.Property<int>("GuideId");
+
+                    b.Property<int>("Rating");
+
+                    b.Property<int>("UserId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("GameId");
+
+                    b.HasIndex("GuideId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Review");
+                });
+
             modelBuilder.Entity("Data.DbModels.User", b =>
                 {
                     b.Property<int>("Id")
@@ -46,6 +114,37 @@ namespace back_end.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
+                });
+
+            modelBuilder.Entity("Data.DbModels.Guide", b =>
+                {
+                    b.HasOne("Data.DbModels.User", "Author")
+                        .WithMany("Guides")
+                        .HasForeignKey("AuthorId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Data.DbModels.Game", "Game")
+                        .WithMany("Guides")
+                        .HasForeignKey("GameId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Data.DbModels.Review", b =>
+                {
+                    b.HasOne("Data.DbModels.Game", "Game")
+                        .WithMany("GameReviews")
+                        .HasForeignKey("GameId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Data.DbModels.Guide", "Guide")
+                        .WithMany("Reviews")
+                        .HasForeignKey("GuideId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Data.DbModels.User", "User")
+                        .WithMany("GameReviews")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

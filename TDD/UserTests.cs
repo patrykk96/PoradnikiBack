@@ -119,10 +119,8 @@ namespace TDD
         [Fact]
         public async void ShouldNotSetAvatarIfUserNotFound()
         {
-            var model = new ImageModel()
-            {
-                Id = 1,
-            };
+            var model = new ImageModel();
+            var id = 1;
 
             User user = null;
 
@@ -133,7 +131,7 @@ namespace TDD
             var userService = new UserService(repo.Object, hosting.Object);
             var userController = new UserController(userService);
 
-            var result = await userController.SetUserAvatar(model);
+            var result = await userController.SetUserAvatar(id, model);
             var badRequest = Assert.IsType<BadRequestObjectResult>(result);
             var errorResult = Assert.IsAssignableFrom<ResultDto<ImagePathDto>>(badRequest.Value);
 
@@ -146,10 +144,10 @@ namespace TDD
         {
             var model = new ImageModel()
             {
-                Id = 1,
                 Image = null
             };
 
+            var id = 1;
             User user = new User()
             {
                 Id = 1
@@ -162,7 +160,7 @@ namespace TDD
             var userService = new UserService(repo.Object, hosting.Object);
             var userController = new UserController(userService);
 
-            var result = await userController.SetUserAvatar(model);
+            var result = await userController.SetUserAvatar(id, model);
             var badRequest = Assert.IsType<BadRequestObjectResult>(result);
             var errorResult = Assert.IsAssignableFrom<ResultDto<ImagePathDto>>(badRequest.Value);
 
@@ -175,10 +173,10 @@ namespace TDD
         {
             var model = new ImageModel()
             {
-                Id = 1,
                 Image = new Mock<IFormFile>().Object
             };
 
+            var id = 1;
             User user = new User()
             {
                 Id = 1
@@ -191,7 +189,7 @@ namespace TDD
             var userService = new UserService(repo.Object, hosting.Object);
             var userController = new UserController(userService);
 
-            var result = await userController.SetUserAvatar(model);
+            var result = await userController.SetUserAvatar(id, model);
             var OkResult = Assert.IsType<OkObjectResult>(result);
             var ResultValue = Assert.IsAssignableFrom<ResultDto<ImagePathDto>>(OkResult.Value);
 

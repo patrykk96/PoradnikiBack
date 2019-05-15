@@ -11,6 +11,6 @@ namespace Interfaces
     {
         Task<ResultDto<UserDto>> GetUser(int id);
         Task<ResultDto<BaseDto>> EditUser(UserModel editUserModel);
-        Task<ResultDto<ImagePathDto>> SetUserAvatar(ImageModel imageModel);
+        Task<ResultDto<ImagePathDto>> SetUserAvatar(int id, ImageModel imageModel);
     }
 }

@@ -22,7 +22,7 @@ namespace back_end.Controllers
             _userService = userService;
         }
 
-        [HttpGet("getUser/{id}")]
+        [HttpGet("getUser/{userId}")]
         public async Task<IActionResult> GetUser(int userId)
         {
             if (!ModelState.IsValid)
@@ -58,15 +58,15 @@ namespace back_end.Controllers
             return Ok(result);
         }
 
-        [HttpPatch("setAvatar")]
-        public async Task<IActionResult> SetUserAvatar(ImageModel imageModel)
+        [HttpPatch("setAvatar/{id}")]
+        public async Task<IActionResult> SetUserAvatar(int id, ImageModel imageModel)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest();
             }
 
-            var result = await _userService.SetUserAvatar(imageModel);
+            var result = await _userService.SetUserAvatar(id, imageModel);
 
             if (result.Error != null)
             {
