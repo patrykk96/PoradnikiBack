@@ -7,6 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20190517100931_Review Guide Repair.cs" />
+    <Compile Remove="Migrations\20190517100931_Review Guide Repair.Designer.cs" />
+    <Compile Remove="Migrations\20190517101908_Games.cs" />
+    <Compile Remove="Migrations\20190517101908_Games.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.2.3" />

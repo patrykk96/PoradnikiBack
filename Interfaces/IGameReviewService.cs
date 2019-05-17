@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace Interfaces
 {
-    public interface IReviewService
+    public interface IGameReviewService
     {
-        Task<ResultDto<BaseDto>> AddReview(ReviewModel reviewModel);
+        Task<ResultDto<BaseDto>> AddReview(GameReviewModel reviewModel);
     }
 }

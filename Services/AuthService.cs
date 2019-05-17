@@ -132,7 +132,8 @@ namespace Services
 
             result.SuccessResult = new LoginDto()
             {
-                Token = token
+                Token = token,
+                Id = user.Id
             };
 
             return result;
@@ -346,12 +347,23 @@ namespace Services
                 _repo.Update(user);
             }
 
+            int num;
 
+            if (user != null)
+            {
+                num = user.Id;
+            }
+            else
+            {
+                var u = _repo.GetSingleEntity(x => x.Email == epInfo["email"]);
+                num = u.Id;
+            }
             var token = GenerateToken(user);
 
             result.SuccessResult = new LoginDto()
             {
-                Token = token
+                Token = token,
+                Id = num    
             };
 
             return result;

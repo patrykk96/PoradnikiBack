@@ -16,7 +16,7 @@ namespace Repository
         public DbSet<User> Users { get; set; }
         public DbSet<Guide> Guides { get; set; }
         public DbSet<Game> Games { get; set; }
-        public DbSet<Review> Reviews { get; set; }
+        public DbSet<GameReview> GameReviews { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -30,20 +30,15 @@ namespace Repository
                 .WithOne(x => x.Game)
                 .HasForeignKey(x => x.GameId);
 
-            modelBuilder.Entity<Review>()
+            modelBuilder.Entity<GameReview>()
                 .HasOne(x => x.Game)
                 .WithMany(x => x.GameReviews)
                 .HasForeignKey(x => x.GameId);
 
-            modelBuilder.Entity<Review>()
+            modelBuilder.Entity<GameReview>()
                 .HasOne(x => x.User)
                 .WithMany(x => x.GameReviews)
                 .HasForeignKey(x => x.UserId);
-
-            modelBuilder.Entity<Review>()
-                .HasOne(x => x.Guide)
-                .WithMany(x => x.Reviews)
-                .HasForeignKey(x => x.GuideId);
         }
     }
 }

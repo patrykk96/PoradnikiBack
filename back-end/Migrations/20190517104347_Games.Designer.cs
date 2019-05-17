@@ -9,7 +9,7 @@ using Repository;
 namespace back_end.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20190515114307_Games")]
+    [Migration("20190517104347_Games")]
     partial class Games
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -36,6 +36,26 @@ namespace back_end.Migrations
                     b.ToTable("Games");
                 });
 
+            modelBuilder.Entity("Data.DbModels.GameReview", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("GameId");
+
+                    b.Property<int>("Rating");
+
+                    b.Property<int>("UserId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("GameId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("GameReviews");
+                });
+
             modelBuilder.Entity("Data.DbModels.Guide", b =>
                 {
                     b.Property<int>("Id")
@@ -59,31 +79,7 @@ namespace back_end.Migrations
 
                     b.HasIndex("GameId");
 
-                    b.ToTable("Guide");
-                });
-
-            modelBuilder.Entity("Data.DbModels.Review", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int>("GameId");
-
-                    b.Property<int>("GuideId");
-
-                    b.Property<int>("Rating");
-
-                    b.Property<int>("UserId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("GameId");
-
-                    b.HasIndex("GuideId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Review");
+                    b.ToTable("Guides");
                 });
 
             modelBuilder.Entity("Data.DbModels.User", b =>
@@ -118,6 +114,19 @@ namespace back_end.Migrations
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("Data.DbModels.GameReview", b =>
+                {
+                    b.HasOne("Data.DbModels.Game", "Game")
+                        .WithMany("GameReviews")
+                        .HasForeignKey("GameId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Data.DbModels.User", "User")
+                        .WithMany("GameReviews")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
             modelBuilder.Entity("Data.DbModels.Guide", b =>
                 {
                     b.HasOne("Data.DbModels.User", "Author")
@@ -128,24 +137,6 @@ namespace back_end.Migrations
                     b.HasOne("Data.DbModels.Game", "Game")
                         .WithMany("Guides")
                         .HasForeignKey("GameId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("Data.DbModels.Review", b =>
-                {
-                    b.HasOne("Data.DbModels.Game", "Game")
-                        .WithMany("GameReviews")
-                        .HasForeignKey("GameId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Data.DbModels.Guide", "Guide")
-                        .WithMany("Reviews")
-                        .HasForeignKey("GuideId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Data.DbModels.User", "User")
-                        .WithMany("GameReviews")
-                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

@@ -23,7 +23,34 @@ namespace back_end.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Guide",
+                name: "GameReviews",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    GameId = table.Column<int>(nullable: false),
+                    UserId = table.Column<int>(nullable: false),
+                    Rating = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_GameReviews", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_GameReviews_Games_GameId",
+                        column: x => x.GameId,
+                        principalTable: "Games",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_GameReviews_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Guides",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -37,88 +64,49 @@ namespace back_end.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Guide", x => x.Id);
+                    table.PrimaryKey("PK_Guides", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Guide_Users_AuthorId",
+                        name: "FK_Guides_Users_AuthorId",
                         column: x => x.AuthorId,
                         principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Guide_Games_GameId",
+                        name: "FK_Guides_Games_GameId",
                         column: x => x.GameId,
                         principalTable: "Games",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Review",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    GameId = table.Column<int>(nullable: false),
-                    UserId = table.Column<int>(nullable: false),
-                    GuideId = table.Column<int>(nullable: false),
-                    Rating = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Review", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Review_Games_GameId",
-                        column: x => x.GameId,
-                        principalTable: "Games",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Review_Guide_GuideId",
-                        column: x => x.GuideId,
-                        principalTable: "Guide",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Review_Users_UserId",
-                        column: x => x.UserId,
-                        principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Guide_AuthorId",
-                table: "Guide",
+                name: "IX_GameReviews_GameId",
+                table: "GameReviews",
+                column: "GameId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_GameReviews_UserId",
+                table: "GameReviews",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Guides_AuthorId",
+                table: "Guides",
                 column: "AuthorId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Guide_GameId",
-                table: "Guide",
+                name: "IX_Guides_GameId",
+                table: "Guides",
                 column: "GameId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Review_GameId",
-                table: "Review",
-                column: "GameId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Review_GuideId",
-                table: "Review",
-                column: "GuideId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Review_UserId",
-                table: "Review",
-                column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Review");
+                name: "GameReviews");
 
             migrationBuilder.DropTable(
-                name: "Guide");
+                name: "Guides");
 
             migrationBuilder.DropTable(
                 name: "Games");

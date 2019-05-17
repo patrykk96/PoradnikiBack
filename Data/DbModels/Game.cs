@@ -12,6 +12,6 @@ namespace Data.DbModels
         public double Rating { get; set; }
 
         public virtual ICollection<Guide> Guides { get; set; }
-        public virtual ICollection<Review> GameReviews { get; set; }
+        public virtual ICollection<GameReview> GameReviews { get; set; }
     }
 }

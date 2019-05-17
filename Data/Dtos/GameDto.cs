@@ -11,5 +11,6 @@ namespace Data.Dtos
         public string Description { get; set; }
         public string Image { get; set; }
         public double Rating { get; set; }
+        public int GuidesCount { get; set; }
     }
 }

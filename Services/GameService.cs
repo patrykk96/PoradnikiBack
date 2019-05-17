@@ -15,11 +15,13 @@ namespace Services
     public class GameService : IGameService
     {
         private readonly IRepository<Game> _repo;
+        private readonly IRepository<Guide> _guideRepo;
         private readonly IHostingEnvironment _hostingEnvironment;
 
-        public GameService(IRepository<Game> repo, IHostingEnvironment hostingEnvironment)
+        public GameService(IRepository<Game> repo, IRepository<Guide> guideRepo, IHostingEnvironment hostingEnvironment)
         {
             _repo = repo;
+            _guideRepo = guideRepo;
             _hostingEnvironment = hostingEnvironment;
         }
 
@@ -162,13 +164,16 @@ namespace Services
                 return result;
             }
 
+            var guides = await _guideRepo.GetAllBy(x => x.GameId == id);
+
             var gameToSend = new GameDto()
             {
                 Id = game.Id,
                 Description = game.Description,
                 Name = game.Name,
                 Image = game.Image,
-                Rating = game.Rating
+                Rating = game.Rating,
+                GuidesCount = guides.Count
             };
 
             result.SuccessResult = gameToSend;
@@ -189,13 +194,15 @@ namespace Services
 
             foreach(var game in games)
             {
+                var guides = await _guideRepo.GetAllBy(x => x.GameId == game.Id);
                 var g = new GameDto()
                 {
                     Id = game.Id,
                     Description = game.Description,
                     Image = game.Image,
                     Name = game.Name,
-                    Rating = game.Rating
+                    Rating = game.Rating,
+                    GuidesCount = guides.Count
                 };
 
                 gamesToSend.Add(g);

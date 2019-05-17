@@ -7,5 +7,6 @@ namespace Data.Dtos
     public class LoginDto : BaseDto
     {
         public string Token { get; set; }
+        public int Id { get; set; }
     }
 }

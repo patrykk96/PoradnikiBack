@@ -42,7 +42,8 @@ namespace Services
             {
                 Id = user.Id,
                 Description = user.Description,
-                Username = user.Username
+                Username = user.Username,
+                Email = user.Email
             };
 
             result.SuccessResult = new UserDto
