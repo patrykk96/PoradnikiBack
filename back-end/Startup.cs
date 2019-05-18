@@ -41,7 +41,7 @@ namespace back_end
             services.AddScoped<IImageService, ImageService>();
             services.AddScoped<IGameService, GameService>();
             services.AddScoped<IGuideService, GuideService>();
-            services.AddScoped<IReviewService, ReviewService>();
+            services.AddScoped<IGameReviewService, GameReviewService>();
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
@@ -62,6 +62,21 @@ namespace back_end
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Info { Title = "My API", Version = "v1" });
+
+                var security = new Dictionary<string, IEnumerable<string>>
+                {
+                    {"Bearer", new string[] { }},
+                };
+
+                c.AddSecurityDefinition("Bearer", new ApiKeyScheme
+                {
+                    Description = "JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\"",
+                    Name = "Authorization",
+                    In = "header",
+                    Type = "apiKey"
+                });
+
+                c.AddSecurityRequirement(security);
             });
         }
 

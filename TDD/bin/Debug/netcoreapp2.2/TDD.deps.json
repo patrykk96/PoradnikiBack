@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v2.2",
-    "signature": "db4dae49ed8735eeb49789600221b3cddcee5eaf"
+    "signature": "6d2cde994da220424366a9eeb03f3f3ee6a8cdfa"
   },
   "compilationOptions": {},
   "targets": {
@@ -78,14 +78,14 @@
           }
         }
       },
-      "Microsoft.Data.Sqlite.Core/2.2.4": {
+      "Microsoft.Data.Sqlite.Core/2.2.3": {
         "dependencies": {
           "SQLitePCLRaw.core": "1.1.12"
         },
         "runtime": {
           "lib/netstandard2.0/Microsoft.Data.Sqlite.dll": {
-            "assemblyVersion": "2.2.4.0",
-            "fileVersion": "2.2.4.19081"
+            "assemblyVersion": "2.2.3.0",
+            "fileVersion": "2.2.3.19047"
           }
         }
       },
@@ -100,68 +100,68 @@
           }
         }
       },
-      "Microsoft.EntityFrameworkCore/2.2.4": {
+      "Microsoft.EntityFrameworkCore/2.2.3": {
         "dependencies": {
-          "Microsoft.EntityFrameworkCore.Abstractions": "2.2.4",
-          "Microsoft.EntityFrameworkCore.Analyzers": "2.2.4",
+          "Microsoft.EntityFrameworkCore.Abstractions": "2.2.3",
+          "Microsoft.EntityFrameworkCore.Analyzers": "2.2.3",
           "Remotion.Linq": "2.2.0",
           "System.Collections.Immutable": "1.5.0",
           "System.Interactive.Async": "3.2.0"
         },
         "runtime": {
           "lib/netstandard2.0/Microsoft.EntityFrameworkCore.dll": {
-            "assemblyVersion": "2.2.4.0",
-            "fileVersion": "2.2.4.19081"
+            "assemblyVersion": "2.2.3.0",
+            "fileVersion": "2.2.3.19047"
           }
         }
       },
-      "Microsoft.EntityFrameworkCore.Abstractions/2.2.4": {
+      "Microsoft.EntityFrameworkCore.Abstractions/2.2.3": {
         "runtime": {
           "lib/netstandard2.0/Microsoft.EntityFrameworkCore.Abstractions.dll": {
-            "assemblyVersion": "2.2.4.0",
-            "fileVersion": "2.2.4.19081"
+            "assemblyVersion": "2.2.3.0",
+            "fileVersion": "2.2.3.19047"
           }
         }
       },
-      "Microsoft.EntityFrameworkCore.Analyzers/2.2.4": {},
-      "Microsoft.EntityFrameworkCore.Design/2.2.4": {
+      "Microsoft.EntityFrameworkCore.Analyzers/2.2.3": {},
+      "Microsoft.EntityFrameworkCore.Design/2.2.3": {
         "dependencies": {
-          "Microsoft.EntityFrameworkCore.Relational": "2.2.4"
+          "Microsoft.EntityFrameworkCore.Relational": "2.2.3"
         },
         "runtime": {
           "lib/netstandard2.0/Microsoft.EntityFrameworkCore.Design.dll": {
-            "assemblyVersion": "2.2.4.0",
-            "fileVersion": "2.2.4.19081"
+            "assemblyVersion": "2.2.3.0",
+            "fileVersion": "2.2.3.19047"
           }
         }
       },
-      "Microsoft.EntityFrameworkCore.Relational/2.2.4": {
+      "Microsoft.EntityFrameworkCore.Relational/2.2.3": {
         "dependencies": {
-          "Microsoft.EntityFrameworkCore": "2.2.4"
+          "Microsoft.EntityFrameworkCore": "2.2.3"
         },
         "runtime": {
           "lib/netstandard2.0/Microsoft.EntityFrameworkCore.Relational.dll": {
-            "assemblyVersion": "2.2.4.0",
-            "fileVersion": "2.2.4.19081"
+            "assemblyVersion": "2.2.3.0",
+            "fileVersion": "2.2.3.19047"
           }
         }
       },
-      "Microsoft.EntityFrameworkCore.Sqlite/2.2.4": {
+      "Microsoft.EntityFrameworkCore.Sqlite/2.2.3": {
         "dependencies": {
-          "Microsoft.EntityFrameworkCore.Sqlite.Core": "2.2.4",
+          "Microsoft.EntityFrameworkCore.Sqlite.Core": "2.2.3",
           "SQLitePCLRaw.bundle_green": "1.1.12"
         }
       },
-      "Microsoft.EntityFrameworkCore.Sqlite.Core/2.2.4": {
+      "Microsoft.EntityFrameworkCore.Sqlite.Core/2.2.3": {
         "dependencies": {
-          "Microsoft.Data.Sqlite.Core": "2.2.4",
-          "Microsoft.EntityFrameworkCore.Relational": "2.2.4",
+          "Microsoft.Data.Sqlite.Core": "2.2.3",
+          "Microsoft.EntityFrameworkCore.Relational": "2.2.3",
           "Microsoft.Extensions.DependencyModel": "2.1.0"
         },
         "runtime": {
           "lib/netstandard2.0/Microsoft.EntityFrameworkCore.Sqlite.dll": {
-            "assemblyVersion": "2.2.4.0",
-            "fileVersion": "2.2.4.19081"
+            "assemblyVersion": "2.2.3.0",
+            "fileVersion": "2.2.3.19047"
           }
         }
       },
@@ -436,90 +436,90 @@
           }
         }
       },
-      "Microsoft.VisualStudio.Web.CodeGeneration/2.2.3": {
+      "Microsoft.VisualStudio.Web.CodeGeneration/2.2.0": {
         "dependencies": {
-          "Microsoft.VisualStudio.Web.CodeGeneration.EntityFrameworkCore": "2.2.3"
+          "Microsoft.VisualStudio.Web.CodeGeneration.EntityFrameworkCore": "2.2.0"
         },
         "runtime": {
           "lib/netstandard2.0/Microsoft.VisualStudio.Web.CodeGeneration.dll": {
-            "assemblyVersion": "2.2.3.0",
-            "fileVersion": "2.2.3.0"
+            "assemblyVersion": "2.2.0.0",
+            "fileVersion": "2.2.0.0"
           }
         }
       },
-      "Microsoft.VisualStudio.Web.CodeGeneration.Contracts/2.2.3": {
+      "Microsoft.VisualStudio.Web.CodeGeneration.Contracts/2.2.0": {
         "runtime": {
           "lib/netstandard2.0/Microsoft.VisualStudio.Web.CodeGeneration.Contracts.dll": {
-            "assemblyVersion": "2.2.3.0",
-            "fileVersion": "2.2.3.0"
+            "assemblyVersion": "2.2.0.0",
+            "fileVersion": "2.2.0.0"
           }
         }
       },
-      "Microsoft.VisualStudio.Web.CodeGeneration.Core/2.2.3": {
+      "Microsoft.VisualStudio.Web.CodeGeneration.Core/2.2.0": {
         "dependencies": {
-          "Microsoft.VisualStudio.Web.CodeGeneration.Templating": "2.2.3"
+          "Microsoft.VisualStudio.Web.CodeGeneration.Templating": "2.2.0"
         },
         "runtime": {
           "lib/netstandard2.0/Microsoft.VisualStudio.Web.CodeGeneration.Core.dll": {
-            "assemblyVersion": "2.2.3.0",
-            "fileVersion": "2.2.3.0"
+            "assemblyVersion": "2.2.0.0",
+            "fileVersion": "2.2.0.0"
           }
         }
       },
-      "Microsoft.VisualStudio.Web.CodeGeneration.Design/2.2.3": {
+      "Microsoft.VisualStudio.Web.CodeGeneration.Design/2.2.0": {
         "dependencies": {
-          "Microsoft.VisualStudio.Web.CodeGenerators.Mvc": "2.2.3"
+          "Microsoft.VisualStudio.Web.CodeGenerators.Mvc": "2.2.0"
         },
         "runtime": {
           "lib/netstandard2.0/dotnet-aspnet-codegenerator-design.dll": {
-            "assemblyVersion": "2.2.3.0",
-            "fileVersion": "2.2.3.0"
+            "assemblyVersion": "2.2.0.0",
+            "fileVersion": "2.2.0.0"
           }
         }
       },
-      "Microsoft.VisualStudio.Web.CodeGeneration.EntityFrameworkCore/2.2.3": {
+      "Microsoft.VisualStudio.Web.CodeGeneration.EntityFrameworkCore/2.2.0": {
         "dependencies": {
-          "Microsoft.VisualStudio.Web.CodeGeneration.Core": "2.2.3"
+          "Microsoft.VisualStudio.Web.CodeGeneration.Core": "2.2.0"
         },
         "runtime": {
           "lib/netstandard2.0/Microsoft.VisualStudio.Web.CodeGeneration.EntityFrameworkCore.dll": {
-            "assemblyVersion": "2.2.3.0",
-            "fileVersion": "2.2.3.0"
+            "assemblyVersion": "2.2.0.0",
+            "fileVersion": "2.2.0.0"
           }
         }
       },
-      "Microsoft.VisualStudio.Web.CodeGeneration.Templating/2.2.3": {
+      "Microsoft.VisualStudio.Web.CodeGeneration.Templating/2.2.0": {
         "dependencies": {
-          "Microsoft.VisualStudio.Web.CodeGeneration.Utils": "2.2.3"
+          "Microsoft.VisualStudio.Web.CodeGeneration.Utils": "2.2.0"
         },
         "runtime": {
           "lib/netstandard2.0/Microsoft.VisualStudio.Web.CodeGeneration.Templating.dll": {
-            "assemblyVersion": "2.2.3.0",
-            "fileVersion": "2.2.3.0"
+            "assemblyVersion": "2.2.0.0",
+            "fileVersion": "2.2.0.0"
           }
         }
       },
-      "Microsoft.VisualStudio.Web.CodeGeneration.Utils/2.2.3": {
+      "Microsoft.VisualStudio.Web.CodeGeneration.Utils/2.2.0": {
         "dependencies": {
           "Microsoft.CodeAnalysis.CSharp.Workspaces": "2.8.0",
-          "Microsoft.VisualStudio.Web.CodeGeneration.Contracts": "2.2.3",
+          "Microsoft.VisualStudio.Web.CodeGeneration.Contracts": "2.2.0",
           "NuGet.Frameworks": "4.7.0"
         },
         "runtime": {
           "lib/netstandard2.0/Microsoft.VisualStudio.Web.CodeGeneration.Utils.dll": {
-            "assemblyVersion": "2.2.3.0",
-            "fileVersion": "2.2.3.0"
+            "assemblyVersion": "2.2.0.0",
+            "fileVersion": "2.2.0.0"
           }
         }
       },
-      "Microsoft.VisualStudio.Web.CodeGenerators.Mvc/2.2.3": {
+      "Microsoft.VisualStudio.Web.CodeGenerators.Mvc/2.2.0": {
         "dependencies": {
-          "Microsoft.VisualStudio.Web.CodeGeneration": "2.2.3"
+          "Microsoft.VisualStudio.Web.CodeGeneration": "2.2.0"
         },
         "runtime": {
           "lib/netstandard2.0/Microsoft.VisualStudio.Web.CodeGenerators.Mvc.dll": {
-            "assemblyVersion": "2.2.3.0",
-            "fileVersion": "2.2.3.0"
+            "assemblyVersion": "2.2.0.0",
+            "fileVersion": "2.2.0.0"
           }
         }
       },
@@ -900,10 +900,10 @@
         "dependencies": {
           "Data": "1.0.0",
           "Interfaces": "1.0.0",
-          "Microsoft.EntityFrameworkCore": "2.2.4",
-          "Microsoft.EntityFrameworkCore.Design": "2.2.4",
-          "Microsoft.EntityFrameworkCore.Sqlite": "2.2.4",
-          "Microsoft.VisualStudio.Web.CodeGeneration.Design": "2.2.3",
+          "Microsoft.EntityFrameworkCore": "2.2.3",
+          "Microsoft.EntityFrameworkCore.Design": "2.2.3",
+          "Microsoft.EntityFrameworkCore.Sqlite": "2.2.3",
+          "Microsoft.VisualStudio.Web.CodeGeneration.Design": "2.2.0",
           "Repository": "1.0.0",
           "Services": "1.0.0",
           "Swashbuckle.AspNetCore": "4.0.1"
@@ -929,9 +929,9 @@
         "dependencies": {
           "Data": "1.0.0",
           "Interfaces": "1.0.0",
-          "Microsoft.EntityFrameworkCore": "2.2.4",
-          "Microsoft.EntityFrameworkCore.Design": "2.2.4",
-          "Microsoft.EntityFrameworkCore.Sqlite": "2.2.4"
+          "Microsoft.EntityFrameworkCore": "2.2.3",
+          "Microsoft.EntityFrameworkCore.Design": "2.2.3",
+          "Microsoft.EntityFrameworkCore.Sqlite": "2.2.3"
         },
         "runtime": {
           "Repository.dll": {}
@@ -940,8 +940,7 @@
       "Services/1.0.0": {
         "dependencies": {
           "Data": "1.0.0",
-          "Interfaces": "1.0.0",
-          "Repository": "1.0.0"
+          "Interfaces": "1.0.0"
         },
         "runtime": {
           "Services.dll": {}
@@ -990,12 +989,12 @@
       "path": "microsoft.codecoverage/16.0.1",
       "hashPath": "microsoft.codecoverage.16.0.1.nupkg.sha512"
     },
-    "Microsoft.Data.Sqlite.Core/2.2.4": {
+    "Microsoft.Data.Sqlite.Core/2.2.3": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-69DJj8bUJpXPfWpmJ/Sh165GWjLjlL516l0GnJDImabfR+leXb61HaQF97THWvyx5yY7MvpO94QW5nyiXMVOAA==",
-      "path": "microsoft.data.sqlite.core/2.2.4",
-      "hashPath": "microsoft.data.sqlite.core.2.2.4.nupkg.sha512"
+      "sha512": "sha512-WVhNky8hr/k6+PfwOz5yJzNe4CPCkyOnYI4nAwfY2qm54/thGGXLwgga+i07lvLryThCOJ4JaQfJg1iZLzlP5Q==",
+      "path": "microsoft.data.sqlite.core/2.2.3",
+      "hashPath": "microsoft.data.sqlite.core.2.2.3.nupkg.sha512"
     },
     "Microsoft.DotNet.PlatformAbstractions/2.1.0": {
       "type": "package",
@@ -1004,54 +1003,54 @@
       "path": "microsoft.dotnet.platformabstractions/2.1.0",
       "hashPath": "microsoft.dotnet.platformabstractions.2.1.0.nupkg.sha512"
     },
-    "Microsoft.EntityFrameworkCore/2.2.4": {
+    "Microsoft.EntityFrameworkCore/2.2.3": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-aQ0sAe2mOtSp3StjKT2wDA/BO3k8BLfpIXIG1MOlGytjQWQOvW3BzDPfgXOhxbSa7Bhdsx97aYzZUGD3DQAQjQ==",
-      "path": "microsoft.entityframeworkcore/2.2.4",
-      "hashPath": "microsoft.entityframeworkcore.2.2.4.nupkg.sha512"
+      "sha512": "sha512-GUiOOYMUiaXK6G/RqgBgI2NsHJLKSFrHuOVnpXQrC7VgmFGG7sFyQmh/j5cMJT5XeGCymNY3wnDlewZ1GEFYJg==",
+      "path": "microsoft.entityframeworkcore/2.2.3",
+      "hashPath": "microsoft.entityframeworkcore.2.2.3.nupkg.sha512"
     },
-    "Microsoft.EntityFrameworkCore.Abstractions/2.2.4": {
+    "Microsoft.EntityFrameworkCore.Abstractions/2.2.3": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-GjtIOANlpy7JcGK0Q169n52713hIHHfxUHq1+xoWlAZYSI0h/n2DrEWwCIsrnInU8FaLq4cIG7UgMTL0CnUUPw==",
-      "path": "microsoft.entityframeworkcore.abstractions/2.2.4",
-      "hashPath": "microsoft.entityframeworkcore.abstractions.2.2.4.nupkg.sha512"
+      "sha512": "sha512-89dSjkZmLVnsbIoiQyMDdMBakTrgiY+1mfu4MRfWRX1ysSx+nGfcPPZ8QfRKLq+i7EIqylUNVJSHi7bHTwL9LQ==",
+      "path": "microsoft.entityframeworkcore.abstractions/2.2.3",
+      "hashPath": "microsoft.entityframeworkcore.abstractions.2.2.3.nupkg.sha512"
     },
-    "Microsoft.EntityFrameworkCore.Analyzers/2.2.4": {
+    "Microsoft.EntityFrameworkCore.Analyzers/2.2.3": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-cLJo6dikdFQd2j9cFHhC2M1rzUeYvJLR/m7cBcuKRI6ek5t5ZyGZ0hzEJwCQmKRDV4tAl5p+NIrfDjfqTK8POw==",
-      "path": "microsoft.entityframeworkcore.analyzers/2.2.4",
-      "hashPath": "microsoft.entityframeworkcore.analyzers.2.2.4.nupkg.sha512"
+      "sha512": "sha512-+7DQd8xaq1kh2szcVkMJAN4/TvjFt5gK4fIsRHcPvZrc10p9Rhhitd44xGTGs9e0RRVijz0+OVI7jPvKaVfwAQ==",
+      "path": "microsoft.entityframeworkcore.analyzers/2.2.3",
+      "hashPath": "microsoft.entityframeworkcore.analyzers.2.2.3.nupkg.sha512"
     },
-    "Microsoft.EntityFrameworkCore.Design/2.2.4": {
+    "Microsoft.EntityFrameworkCore.Design/2.2.3": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-4SfnD7wYxr+OzcPOZYlzPtKtL1cdXk+a8g4bKc8QcgaGhpvVOTK5ROTZaOe10tmvFXFEJVZSGtXpFAbgiDFtjg==",
-      "path": "microsoft.entityframeworkcore.design/2.2.4",
-      "hashPath": "microsoft.entityframeworkcore.design.2.2.4.nupkg.sha512"
+      "sha512": "sha512-EdKCRSAlVF0PLXl1vi5ojRh0jRhSDywPYN9+0UpKOBZ53Vpa+8Qyio6p9WMJNqp+LkXS5fRQshHuiljFTVGY/g==",
+      "path": "microsoft.entityframeworkcore.design/2.2.3",
+      "hashPath": "microsoft.entityframeworkcore.design.2.2.3.nupkg.sha512"
     },
-    "Microsoft.EntityFrameworkCore.Relational/2.2.4": {
+    "Microsoft.EntityFrameworkCore.Relational/2.2.3": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-Ga+kJhoSBNYv8C2gQl2sB5bTBkWsLFn92CPjZA5ql/MyxJTWri6lf44/GSYEcOQj0tqF5HhMAaB1HxQMiIPBcQ==",
-      "path": "microsoft.entityframeworkcore.relational/2.2.4",
-      "hashPath": "microsoft.entityframeworkcore.relational.2.2.4.nupkg.sha512"
+      "sha512": "sha512-gwB+FOVqI+lwTl9MCtH5iI6Zfes0JlCDBuxCQ3ngLMzSqFFzgLANmmgA/cl+D2WOZ01TXivpRSzNMrnDfOJljA==",
+      "path": "microsoft.entityframeworkcore.relational/2.2.3",
+      "hashPath": "microsoft.entityframeworkcore.relational.2.2.3.nupkg.sha512"
     },
-    "Microsoft.EntityFrameworkCore.Sqlite/2.2.4": {
+    "Microsoft.EntityFrameworkCore.Sqlite/2.2.3": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-SfDyGsk8S+EN/VTli9zOSwzoPkNOTKJ1dzZtXKXZiaDb9OmDxW8mQsKPW8A1CTiZx+/2ACVb8Moc2Sw3cIt6xQ==",
-      "path": "microsoft.entityframeworkcore.sqlite/2.2.4",
-      "hashPath": "microsoft.entityframeworkcore.sqlite.2.2.4.nupkg.sha512"
+      "sha512": "sha512-XYAorAbpuWow4tFugdOvZJq8nlXSkA1/FdZYltFc/t73t2Ay0hjeCDuyQSFG14sjVokG0R3eefkgkiBzTcbBBQ==",
+      "path": "microsoft.entityframeworkcore.sqlite/2.2.3",
+      "hashPath": "microsoft.entityframeworkcore.sqlite.2.2.3.nupkg.sha512"
     },
-    "Microsoft.EntityFrameworkCore.Sqlite.Core/2.2.4": {
+    "Microsoft.EntityFrameworkCore.Sqlite.Core/2.2.3": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-RezSS0Tli9yfjIJIrwyB334gHymL6/Oy9YM47NyE4kCT0eLkZjs4VKptnX6Pvl8+12oP1gTDvuYZhrhpxfOFoA==",
-      "path": "microsoft.entityframeworkcore.sqlite.core/2.2.4",
-      "hashPath": "microsoft.entityframeworkcore.sqlite.core.2.2.4.nupkg.sha512"
+      "sha512": "sha512-H5J7VCqFsCy69QAxer4CuNVRthbKRx8zxdQoDsM35oorUe9mcY66TFc/L7wu9RdMgrYuBHZWTYQ8TQdbtPSQGA==",
+      "path": "microsoft.entityframeworkcore.sqlite.core/2.2.3",
+      "hashPath": "microsoft.entityframeworkcore.sqlite.core.2.2.3.nupkg.sha512"
     },
     "Microsoft.Extensions.DependencyModel/2.1.0": {
       "type": "package",
@@ -1081,61 +1080,61 @@
       "path": "microsoft.testplatform.testhost/16.0.1",
       "hashPath": "microsoft.testplatform.testhost.16.0.1.nupkg.sha512"
     },
-    "Microsoft.VisualStudio.Web.CodeGeneration/2.2.3": {
+    "Microsoft.VisualStudio.Web.CodeGeneration/2.2.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-wc71c9HWTeXy9/w9O4Yr2LKmdJjVyIoJ/XQX8/6uma4EAVU25RLtUWlvhA0gpgFw9Kf1TkCv70x+CbKnRw/d8Q==",
-      "path": "microsoft.visualstudio.web.codegeneration/2.2.3",
-      "hashPath": "microsoft.visualstudio.web.codegeneration.2.2.3.nupkg.sha512"
+      "sha512": "sha512-JkUPWWhFH31R7DutTXe5aAQgPE0VqFsoHEOKonbrb6iiDkMikipUOJOPu343RERN7RJ5ppPcCyOt24OuSiqSTA==",
+      "path": "microsoft.visualstudio.web.codegeneration/2.2.0",
+      "hashPath": "microsoft.visualstudio.web.codegeneration.2.2.0.nupkg.sha512"
     },
-    "Microsoft.VisualStudio.Web.CodeGeneration.Contracts/2.2.3": {
+    "Microsoft.VisualStudio.Web.CodeGeneration.Contracts/2.2.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-wXlpxDfRD5aPypa0p0UE97tkRQvAz9D9FfA2GITzr+LlGIpybyGnxkwGVp0Vha1Ibr0kJG0HdnqfeHME/WuAcQ==",
-      "path": "microsoft.visualstudio.web.codegeneration.contracts/2.2.3",
-      "hashPath": "microsoft.visualstudio.web.codegeneration.contracts.2.2.3.nupkg.sha512"
+      "sha512": "sha512-cpp0b/0nTz2lc5g8B19cY2QRsYE0SDi7bXShAvSv9+9WyQbI9IhIVQS5VBjj5MuFoJlhkSO/coFOkVsgTZt+Ag==",
+      "path": "microsoft.visualstudio.web.codegeneration.contracts/2.2.0",
+      "hashPath": "microsoft.visualstudio.web.codegeneration.contracts.2.2.0.nupkg.sha512"
     },
-    "Microsoft.VisualStudio.Web.CodeGeneration.Core/2.2.3": {
+    "Microsoft.VisualStudio.Web.CodeGeneration.Core/2.2.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-APdPavBUYcGPBaW4rjxBVRePWmg0ZzhIRymOzvLFWUtzfvJKw1+8PaCzsH7Uvl+felm0L1UVQwBx1Do0R7j7Xg==",
-      "path": "microsoft.visualstudio.web.codegeneration.core/2.2.3",
-      "hashPath": "microsoft.visualstudio.web.codegeneration.core.2.2.3.nupkg.sha512"
+      "sha512": "sha512-da8oCpy7orpQtFlEhoV9IxljYJrYaudKmVkENvkh4vaR+hZ7/G4XmMa1D+yRAmJah+dO75Z2nIwm7xaopfVKSA==",
+      "path": "microsoft.visualstudio.web.codegeneration.core/2.2.0",
+      "hashPath": "microsoft.visualstudio.web.codegeneration.core.2.2.0.nupkg.sha512"
     },
-    "Microsoft.VisualStudio.Web.CodeGeneration.Design/2.2.3": {
+    "Microsoft.VisualStudio.Web.CodeGeneration.Design/2.2.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-xH50cYOU+infRq4KikBuu2qeXcwW4tE0D5TDfKLuLrEtDm90aXI+0qygPsqyISf+lOW7L7rQ64BH/dRYkK3c3Q==",
-      "path": "microsoft.visualstudio.web.codegeneration.design/2.2.3",
-      "hashPath": "microsoft.visualstudio.web.codegeneration.design.2.2.3.nupkg.sha512"
+      "sha512": "sha512-xW5Dp7F9btuJaowuK7bqTyJG8NlbKCAJF4TUVEpXE9AxfVDGQondppXSmjvglchigCFZAaDGY+jyQ9a6uM+Upw==",
+      "path": "microsoft.visualstudio.web.codegeneration.design/2.2.0",
+      "hashPath": "microsoft.visualstudio.web.codegeneration.design.2.2.0.nupkg.sha512"
     },
-    "Microsoft.VisualStudio.Web.CodeGeneration.EntityFrameworkCore/2.2.3": {
+    "Microsoft.VisualStudio.Web.CodeGeneration.EntityFrameworkCore/2.2.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-N9S7TeFZjXzNY9OVbz4OFw9cM9oEeMaCnuLFhetNioy/wPwZbgglrctAEYxfDbvocQ17YCAVR2EMRbYHNDHyVg==",
-      "path": "microsoft.visualstudio.web.codegeneration.entityframeworkcore/2.2.3",
-      "hashPath": "microsoft.visualstudio.web.codegeneration.entityframeworkcore.2.2.3.nupkg.sha512"
+      "sha512": "sha512-snhAAj/1+UzxoS6PCTtHMJ3/C52pWQSXXy7c/eA00xvwS6Uvv9LcasvIF7Hic0dwJDVIGYszzrrE79jhtajzNw==",
+      "path": "microsoft.visualstudio.web.codegeneration.entityframeworkcore/2.2.0",
+      "hashPath": "microsoft.visualstudio.web.codegeneration.entityframeworkcore.2.2.0.nupkg.sha512"
     },
-    "Microsoft.VisualStudio.Web.CodeGeneration.Templating/2.2.3": {
+    "Microsoft.VisualStudio.Web.CodeGeneration.Templating/2.2.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-sW2lHnOoL1xFnSm/2zSedeUoQPlbhPfWjSuUYsxYUj/N5QmLmH98ZLaqP26k6Om/heR6Gux/veXI96yM1Parow==",
-      "path": "microsoft.visualstudio.web.codegeneration.templating/2.2.3",
-      "hashPath": "microsoft.visualstudio.web.codegeneration.templating.2.2.3.nupkg.sha512"
+      "sha512": "sha512-t0Ez/06/9RzwoOoLBsV9tnjRYB247vuQ5+x1KeTpaM0pNrAQ9f/EpxAYyeacjLTFJkohDFbsk4TzZBlyse/fNw==",
+      "path": "microsoft.visualstudio.web.codegeneration.templating/2.2.0",
+      "hashPath": "microsoft.visualstudio.web.codegeneration.templating.2.2.0.nupkg.sha512"
     },
-    "Microsoft.VisualStudio.Web.CodeGeneration.Utils/2.2.3": {
+    "Microsoft.VisualStudio.Web.CodeGeneration.Utils/2.2.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-/r/y+XpOpbCwN/M/HopjfGTDRlmixTd4G6HG6FaBkD/YF3T1u+4WMRVtuB6zz7aw571HmX+6UokEa6HJSwkPDA==",
-      "path": "microsoft.visualstudio.web.codegeneration.utils/2.2.3",
-      "hashPath": "microsoft.visualstudio.web.codegeneration.utils.2.2.3.nupkg.sha512"
+      "sha512": "sha512-e/gJ5BjKGq+mIv3d07p2dWlLYW6n/RhSC05heVQcw/LKvV5PqjeVmoUl0D3OynCvuDTTKQTqEWQpJTqRw12r/Q==",
+      "path": "microsoft.visualstudio.web.codegeneration.utils/2.2.0",
+      "hashPath": "microsoft.visualstudio.web.codegeneration.utils.2.2.0.nupkg.sha512"
     },
-    "Microsoft.VisualStudio.Web.CodeGenerators.Mvc/2.2.3": {
+    "Microsoft.VisualStudio.Web.CodeGenerators.Mvc/2.2.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-0gVuA4KUCHFM4M/9SjG+7j7BzZ7SW/BufF97Q78i2VV8JBbQXc/5Rf6YUG1VGW2fwSEOl9+S26utEGS+86GGGw==",
-      "path": "microsoft.visualstudio.web.codegenerators.mvc/2.2.3",
-      "hashPath": "microsoft.visualstudio.web.codegenerators.mvc.2.2.3.nupkg.sha512"
+      "sha512": "sha512-wcW9mBuILDMsb03N7KAElTyaT6AyXf5ey5shbmVsHeuBxs1pdPY6gAQpxjfEaRM28e0Zn6Iqg+vSfKeJnJveww==",
+      "path": "microsoft.visualstudio.web.codegenerators.mvc/2.2.0",
+      "hashPath": "microsoft.visualstudio.web.codegenerators.mvc.2.2.0.nupkg.sha512"
     },
     "Microsoft.Win32.Primitives/4.0.1": {
       "type": "package",

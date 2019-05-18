@@ -11,5 +11,7 @@ namespace Interfaces
     {
         Task<ResultDto<BaseDto>> AddGuide(GuideModel guideModel);
         Task<ResultDto<BaseDto>> UpdateGuide(int id, GuideModel guideModel);
+        Task<ResultDto<GuideDto>> GetGuide(int id);
+        Task<ResultDto<GuidesDto>> GetGuides(int userId, int gameId);
     }
 }

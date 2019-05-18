@@ -12,17 +12,17 @@ namespace back_end.Controllers
     [Authorize]
     [ApiController]
     [Route("api/[controller]")]
-    public class ReviewController : Controller
+    public class GameReviewController : Controller
     {
-        private readonly IReviewService _reviewService;
+        private readonly IGameReviewService _reviewService;
 
-        public ReviewController(IReviewService reviewService)
+        public GameReviewController(IGameReviewService reviewService)
         {
             _reviewService = reviewService;
         }
 
         [HttpPost("add")]
-        public async Task<IActionResult> AddReview(ReviewModel reviewModel)
+        public async Task<IActionResult> AddReview(GameReviewModel reviewModel)
         {
             if(!ModelState.IsValid)
             {

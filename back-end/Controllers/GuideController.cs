@@ -56,5 +56,41 @@ namespace back_end.Controllers
 
             return Ok(result);
         }
+
+        [HttpGet("getGuide/{id}")]
+        public async Task<IActionResult> GetGuide(int id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            var result = await _guideService.GetGuide(id);
+
+            if (result.Error != null)
+            {
+                return BadRequest(result);
+            }
+
+            return Ok(result);
+        }
+
+        [HttpGet("getGuides/{userId}/{gameId}")]
+        public async Task<IActionResult> GetGuides(int userId, int gameId)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            var result = await _guideService.GetGuides(userId, gameId);
+
+            if (result.Error != null)
+            {
+                return BadRequest(result);
+            }
+
+            return Ok(result);
+        }
     }
 }

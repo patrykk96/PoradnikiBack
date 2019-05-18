@@ -3,15 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.489
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "back-end", "back-end\back-end.csproj", "{B8A77287-9549-4330-A8A4-99D9715FBA7D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "back-end", "back-end\back-end.csproj", "{B8A77287-9549-4330-A8A4-99D9715FBA7D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interfaces", "Interfaces\Interfaces.csproj", "{E1E1C307-E8C9-4E44-8447-B4E55E6F5B78}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Interfaces", "Interfaces\Interfaces.csproj", "{E1E1C307-E8C9-4E44-8447-B4E55E6F5B78}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services", "Services\Services.csproj", "{55D2E5C9-54A8-481E-A22E-B8E805EA6C5E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Services", "Services\Services.csproj", "{55D2E5C9-54A8-481E-A22E-B8E805EA6C5E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repository", "Repository\Repository.csproj", "{0AB1AADE-8D0A-45DA-8055-50CF5ED3BD52}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Repository", "Repository\Repository.csproj", "{0AB1AADE-8D0A-45DA-8055-50CF5ED3BD52}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data", "Data\Data.csproj", "{E96D47A3-7F14-4C41-B83E-8D56C61C1C54}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data", "Data\Data.csproj", "{E96D47A3-7F14-4C41-B83E-8D56C61C1C54}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TDD", "TDD\TDD.csproj", "{81B28EEE-483D-49A3-9B9D-4C83A0B8DD8B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{E96D47A3-7F14-4C41-B83E-8D56C61C1C54}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E96D47A3-7F14-4C41-B83E-8D56C61C1C54}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E96D47A3-7F14-4C41-B83E-8D56C61C1C54}.Release|Any CPU.Build.0 = Release|Any CPU
+		{81B28EEE-483D-49A3-9B9D-4C83A0B8DD8B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{81B28EEE-483D-49A3-9B9D-4C83A0B8DD8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{81B28EEE-483D-49A3-9B9D-4C83A0B8DD8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{81B28EEE-483D-49A3-9B9D-4C83A0B8DD8B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
