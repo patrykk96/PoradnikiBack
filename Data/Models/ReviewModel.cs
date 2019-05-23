@@ -4,10 +4,10 @@ using System.Text;
 
 namespace Data.Models
 {
-    public class GameReviewModel
+    public class ReviewModel
     {
         public int Rating { get; set; }
         public int UserId { get; set; }
-        public int GameId { get; set; }
+        public int EntityId { get; set; }
     }
 }

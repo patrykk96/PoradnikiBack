@@ -123,5 +123,23 @@ namespace back_end.Controllers
 
             return Ok(result);
         }
+
+        [HttpPost("addReview")]
+        public async Task<IActionResult> AddReview(ReviewModel reviewModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            var result = await _gameService.AddReview(reviewModel);
+
+            if (result.Error == null)
+            {
+                return BadRequest(result);
+            }
+
+            return Ok(result);
+        }
     }
 }

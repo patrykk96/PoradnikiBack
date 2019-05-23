@@ -26,10 +26,11 @@ namespace TDD
             var model = new ImageModel();
             var repo = new Mock<IRepository<Game>>();
             var guideRepo = new Mock<IRepository<Guide>>();
+            var gameReviewRepo = new Mock<IRepository<GameReview>>();
             repo.Setup(x => x.Exists(It.IsAny<Expression<Func<Game, bool>>>())).Returns(Task.FromResult(true));
             var hosting = new Mock<IHostingEnvironment>();
 
-            var gameService = new GameService(repo.Object, guideRepo.Object, hosting.Object);
+            var gameService = new GameService(repo.Object, guideRepo.Object, hosting.Object, gameReviewRepo.Object);
             var gameController = new GameController(gameService);
 
             var result = await gameController.AddGame(name, description, model);
@@ -48,10 +49,11 @@ namespace TDD
             var model = new ImageModel();
             var repo = new Mock<IRepository<Game>>();
             var guideRepo = new Mock<IRepository<Guide>>();
+            var gameReviewRepo = new Mock<IRepository<GameReview>>();
             repo.Setup(x => x.Exists(It.IsAny<Expression<Func<Game, bool>>>())).Returns(Task.FromResult(false));
             var hosting = new Mock<IHostingEnvironment>();
 
-            var gameService = new GameService(repo.Object, guideRepo.Object, hosting.Object);
+            var gameService = new GameService(repo.Object, guideRepo.Object, hosting.Object, gameReviewRepo.Object);
             var gameController = new GameController(gameService);
 
             var result = await gameController.AddGame(name, description, model);
@@ -71,10 +73,11 @@ namespace TDD
             Game game = null;
             var repo = new Mock<IRepository<Game>>();
             var guideRepo = new Mock<IRepository<Guide>>();
+            var gameReviewRepo = new Mock<IRepository<GameReview>>();
             repo.Setup(x => x.GetSingleEntity(It.IsAny<Expression<Func<Game, bool>>>())).Returns(Task.FromResult(game));
             var hosting = new Mock<IHostingEnvironment>();
 
-            var gameService = new GameService(repo.Object, guideRepo.Object, hosting.Object);
+            var gameService = new GameService(repo.Object, guideRepo.Object, hosting.Object, gameReviewRepo.Object);
             var gameController = new GameController(gameService);
 
             var result = await gameController.UpdateGame(id, name, description, model);
@@ -95,11 +98,12 @@ namespace TDD
             Game game = new Game();
             var repo = new Mock<IRepository<Game>>();
             var guideRepo = new Mock<IRepository<Guide>>();
+            var gameReviewRepo = new Mock<IRepository<GameReview>>();
             repo.Setup(x => x.GetSingleEntity(It.IsAny<Expression<Func<Game, bool>>>())).Returns(Task.FromResult(game));
             repo.Setup(x => x.Exists(It.IsAny<Expression<Func<Game, bool>>>())).Returns(Task.FromResult(true));
             var hosting = new Mock<IHostingEnvironment>();
 
-            var gameService = new GameService(repo.Object, guideRepo.Object, hosting.Object);
+            var gameService = new GameService(repo.Object, guideRepo.Object, hosting.Object, gameReviewRepo.Object);
             var gameController = new GameController(gameService);
 
             var result = await gameController.UpdateGame(id, name, description, model);
@@ -120,11 +124,12 @@ namespace TDD
             Game game = new Game();
             var repo = new Mock<IRepository<Game>>();
             var guideRepo = new Mock<IRepository<Guide>>();
+            var gameReviewRepo = new Mock<IRepository<GameReview>>();
             repo.Setup(x => x.GetSingleEntity(It.IsAny<Expression<Func<Game, bool>>>())).Returns(Task.FromResult(game));
             repo.Setup(x => x.Exists(It.IsAny<Expression<Func<Game, bool>>>())).Returns(Task.FromResult(false));
             var hosting = new Mock<IHostingEnvironment>();
 
-            var gameService = new GameService(repo.Object, guideRepo.Object, hosting.Object);
+            var gameService = new GameService(repo.Object, guideRepo.Object, hosting.Object, gameReviewRepo.Object);
             var gameController = new GameController(gameService);
 
             var result = await gameController.UpdateGame(id, name, description, model);
@@ -142,10 +147,11 @@ namespace TDD
             Game game = new Game();
             var repo = new Mock<IRepository<Game>>();
             var guideRepo = new Mock<IRepository<Guide>>();
+            var gameReviewRepo = new Mock<IRepository<GameReview>>();
             repo.Setup(x => x.GetSingleEntity(It.IsAny<Expression<Func<Game, bool>>>())).Returns(Task.FromResult(game));
             var hosting = new Mock<IHostingEnvironment>();
 
-            var gameService = new GameService(repo.Object, guideRepo.Object, hosting.Object);
+            var gameService = new GameService(repo.Object, guideRepo.Object, hosting.Object, gameReviewRepo.Object);
             var gameController = new GameController(gameService);
 
             var result = await gameController.DeleteGame(id);
@@ -163,10 +169,11 @@ namespace TDD
             Game game = null;
             var repo = new Mock<IRepository<Game>>();
             var guideRepo = new Mock<IRepository<Guide>>();
+            var gameReviewRepo = new Mock<IRepository<GameReview>>();
             repo.Setup(x => x.GetSingleEntity(It.IsAny<Expression<Func<Game, bool>>>())).Returns(Task.FromResult(game));
             var hosting = new Mock<IHostingEnvironment>();
 
-            var gameService = new GameService(repo.Object, guideRepo.Object, hosting.Object);
+            var gameService = new GameService(repo.Object, guideRepo.Object, hosting.Object, gameReviewRepo.Object);
             var gameController = new GameController(gameService);
 
             var result = await gameController.DeleteGame(id);
@@ -184,10 +191,11 @@ namespace TDD
             Game game = null;
             var repo = new Mock<IRepository<Game>>();
             var guideRepo = new Mock<IRepository<Guide>>();
+            var gameReviewRepo = new Mock<IRepository<GameReview>>();
             repo.Setup(x => x.GetSingleEntity(It.IsAny<Expression<Func<Game, bool>>>())).Returns(Task.FromResult(game));
             var hosting = new Mock<IHostingEnvironment>();
 
-            var gameService = new GameService(repo.Object, guideRepo.Object, hosting.Object);
+            var gameService = new GameService(repo.Object, guideRepo.Object, hosting.Object, gameReviewRepo.Object);
             var gameController = new GameController(gameService);
 
             var result = await gameController.GetGame(id);
@@ -206,11 +214,12 @@ namespace TDD
             var guides = new List<Guide>();
             var repo = new Mock<IRepository<Game>>();
             var guideRepo = new Mock<IRepository<Guide>>();
+            var gameReviewRepo = new Mock<IRepository<GameReview>>();
             repo.Setup(x => x.GetSingleEntity(It.IsAny<Expression<Func<Game, bool>>>())).Returns(Task.FromResult(game));
             guideRepo.Setup(x => x.GetAllBy(It.IsAny<Expression<Func<Guide, bool>>>())).Returns(Task.FromResult(guides));
             var hosting = new Mock<IHostingEnvironment>();
 
-            var gameService = new GameService(repo.Object, guideRepo.Object, hosting.Object);
+            var gameService = new GameService(repo.Object, guideRepo.Object, hosting.Object, gameReviewRepo.Object);
             var gameController = new GameController(gameService);
 
             var result = await gameController.GetGame(id);

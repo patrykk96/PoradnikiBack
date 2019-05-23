@@ -12,5 +12,6 @@ namespace Data.Dtos
         public string GameImage { get; set; }
         public string Name { get; set; }
         public string Content { get; set; }
+        public double Rating { get; set; }
     }
 }

@@ -24,9 +24,10 @@ namespace TDD
             var repo = new Mock<IRepository<Guide>>();
             var gameRepo = new Mock<IRepository<Game>>();
             var userRepo = new Mock<IRepository<User>>();
+            var reviewRepo = new Mock<IRepository<GuideReview>>();
             userRepo.Setup(x => x.Exists(It.IsAny<Expression<Func<User, bool>>>())).Returns(Task.FromResult(false));
 
-            var guideService = new GuideService(repo.Object, gameRepo.Object, userRepo.Object);
+            var guideService = new GuideService(repo.Object, gameRepo.Object, userRepo.Object, reviewRepo.Object);
             var guideController = new GuideController(guideService);
 
             var result = await guideController.AddGuide(guideModel);
@@ -44,10 +45,11 @@ namespace TDD
             var repo = new Mock<IRepository<Guide>>();
             var gameRepo = new Mock<IRepository<Game>>();
             var userRepo = new Mock<IRepository<User>>();
+            var reviewRepo = new Mock<IRepository<GuideReview>>();
             userRepo.Setup(x => x.Exists(It.IsAny<Expression<Func<User, bool>>>())).Returns(Task.FromResult(true));
             gameRepo.Setup(x => x.Exists(It.IsAny<Expression<Func<Game, bool>>>())).Returns(Task.FromResult(false));
 
-            var guideService = new GuideService(repo.Object, gameRepo.Object, userRepo.Object);
+            var guideService = new GuideService(repo.Object, gameRepo.Object, userRepo.Object, reviewRepo.Object);
             var guideController = new GuideController(guideService);
 
             var result = await guideController.AddGuide(guideModel);
@@ -65,10 +67,11 @@ namespace TDD
             var repo = new Mock<IRepository<Guide>>();
             var gameRepo = new Mock<IRepository<Game>>();
             var userRepo = new Mock<IRepository<User>>();
+            var reviewRepo = new Mock<IRepository<GuideReview>>();
             userRepo.Setup(x => x.Exists(It.IsAny<Expression<Func<User, bool>>>())).Returns(Task.FromResult(true));
             gameRepo.Setup(x => x.Exists(It.IsAny<Expression<Func<Game, bool>>>())).Returns(Task.FromResult(true));
 
-            var guideService = new GuideService(repo.Object, gameRepo.Object, userRepo.Object);
+            var guideService = new GuideService(repo.Object, gameRepo.Object, userRepo.Object, reviewRepo.Object);
             var guideController = new GuideController(guideService);
 
             var result = await guideController.AddGuide(guideModel);
@@ -86,10 +89,11 @@ namespace TDD
             var repo = new Mock<IRepository<Guide>>();
             var gameRepo = new Mock<IRepository<Game>>();
             var userRepo = new Mock<IRepository<User>>();
+            var reviewRepo = new Mock<IRepository<GuideReview>>();
             Guide guide = null;
             repo.Setup(x => x.GetSingleEntity(It.IsAny<Expression<Func<Guide, bool>>>())).Returns(Task.FromResult(guide));
 
-            var guideService = new GuideService(repo.Object, gameRepo.Object, userRepo.Object);
+            var guideService = new GuideService(repo.Object, gameRepo.Object, userRepo.Object, reviewRepo.Object);
             var guideController = new GuideController(guideService);
 
             var result = await guideController.UpdateGuide(id, guideModel);
@@ -108,11 +112,12 @@ namespace TDD
             var repo = new Mock<IRepository<Guide>>();
             var gameRepo = new Mock<IRepository<Game>>();
             var userRepo = new Mock<IRepository<User>>();
+            var reviewRepo = new Mock<IRepository<GuideReview>>();
             var guide = new Guide();
             repo.Setup(x => x.GetSingleEntity(It.IsAny<Expression<Func<Guide, bool>>>())).Returns(Task.FromResult(guide));
             userRepo.Setup(x => x.Exists(It.IsAny<Expression<Func<User, bool>>>())).Returns(Task.FromResult(false));
 
-            var guideService = new GuideService(repo.Object, gameRepo.Object, userRepo.Object);
+            var guideService = new GuideService(repo.Object, gameRepo.Object, userRepo.Object, reviewRepo.Object);
             var guideController = new GuideController(guideService);
 
             var result = await guideController.UpdateGuide(id, guideModel);
@@ -131,12 +136,13 @@ namespace TDD
             var repo = new Mock<IRepository<Guide>>();
             var gameRepo = new Mock<IRepository<Game>>();
             var userRepo = new Mock<IRepository<User>>();
+            var reviewRepo = new Mock<IRepository<GuideReview>>();
             var guide = new Guide();
             repo.Setup(x => x.GetSingleEntity(It.IsAny<Expression<Func<Guide, bool>>>())).Returns(Task.FromResult(guide));
             userRepo.Setup(x => x.Exists(It.IsAny<Expression<Func<User, bool>>>())).Returns(Task.FromResult(true));
             gameRepo.Setup(x => x.Exists(It.IsAny<Expression<Func<Game, bool>>>())).Returns(Task.FromResult(false));
 
-            var guideService = new GuideService(repo.Object, gameRepo.Object, userRepo.Object);
+            var guideService = new GuideService(repo.Object, gameRepo.Object, userRepo.Object, reviewRepo.Object);
             var guideController = new GuideController(guideService);
 
             var result = await guideController.UpdateGuide(id, guideModel);
@@ -155,12 +161,13 @@ namespace TDD
             var repo = new Mock<IRepository<Guide>>();
             var gameRepo = new Mock<IRepository<Game>>();
             var userRepo = new Mock<IRepository<User>>();
+            var reviewRepo = new Mock<IRepository<GuideReview>>();
             var guide = new Guide();
             repo.Setup(x => x.GetSingleEntity(It.IsAny<Expression<Func<Guide, bool>>>())).Returns(Task.FromResult(guide));
             userRepo.Setup(x => x.Exists(It.IsAny<Expression<Func<User, bool>>>())).Returns(Task.FromResult(true));
             gameRepo.Setup(x => x.Exists(It.IsAny<Expression<Func<Game, bool>>>())).Returns(Task.FromResult(true));
 
-            var guideService = new GuideService(repo.Object, gameRepo.Object, userRepo.Object);
+            var guideService = new GuideService(repo.Object, gameRepo.Object, userRepo.Object, reviewRepo.Object);
             var guideController = new GuideController(guideService);
 
             var result = await guideController.UpdateGuide(id, guideModel);
@@ -177,10 +184,11 @@ namespace TDD
             var repo = new Mock<IRepository<Guide>>();
             var gameRepo = new Mock<IRepository<Game>>();
             var userRepo = new Mock<IRepository<User>>();
+            var reviewRepo = new Mock<IRepository<GuideReview>>();
             Guide guide = null;
             repo.Setup(x => x.GetSingleEntity(It.IsAny<Expression<Func<Guide, bool>>>())).Returns(Task.FromResult(guide));
-           
-            var guideService = new GuideService(repo.Object, gameRepo.Object, userRepo.Object);
+
+            var guideService = new GuideService(repo.Object, gameRepo.Object, userRepo.Object, reviewRepo.Object);
             var guideController = new GuideController(guideService);
 
             var result = await guideController.GetGuide(id);
@@ -198,12 +206,13 @@ namespace TDD
             var repo = new Mock<IRepository<Guide>>();
             var gameRepo = new Mock<IRepository<Game>>();
             var userRepo = new Mock<IRepository<User>>();
+            var reviewRepo = new Mock<IRepository<GuideReview>>();
             Guide guide = new Guide();
             User user = null;
             repo.Setup(x => x.GetSingleEntity(It.IsAny<Expression<Func<Guide, bool>>>())).Returns(Task.FromResult(guide));
             userRepo.Setup(x => x.GetSingleEntity(It.IsAny<Expression<Func<User, bool>>>())).Returns(Task.FromResult(user));
 
-            var guideService = new GuideService(repo.Object, gameRepo.Object, userRepo.Object);
+            var guideService = new GuideService(repo.Object, gameRepo.Object, userRepo.Object, reviewRepo.Object);
             var guideController = new GuideController(guideService);
 
             var result = await guideController.GetGuide(id);
@@ -221,6 +230,7 @@ namespace TDD
             var repo = new Mock<IRepository<Guide>>();
             var gameRepo = new Mock<IRepository<Game>>();
             var userRepo = new Mock<IRepository<User>>();
+            var reviewRepo = new Mock<IRepository<GuideReview>>();
             Guide guide = new Guide();
             User user = new User();
             Game game = null;
@@ -228,7 +238,7 @@ namespace TDD
             userRepo.Setup(x => x.GetSingleEntity(It.IsAny<Expression<Func<User, bool>>>())).Returns(Task.FromResult(user));
             gameRepo.Setup(x => x.GetSingleEntity(It.IsAny<Expression<Func<Game, bool>>>())).Returns(Task.FromResult(game));
 
-            var guideService = new GuideService(repo.Object, gameRepo.Object, userRepo.Object);
+            var guideService = new GuideService(repo.Object, gameRepo.Object, userRepo.Object, reviewRepo.Object);
             var guideController = new GuideController(guideService);
 
             var result = await guideController.GetGuide(id);
@@ -246,6 +256,7 @@ namespace TDD
             var repo = new Mock<IRepository<Guide>>();
             var gameRepo = new Mock<IRepository<Game>>();
             var userRepo = new Mock<IRepository<User>>();
+            var reviewRepo = new Mock<IRepository<GuideReview>>();
             Guide guide = new Guide();
             User user = new User();
             Game game = new Game();
@@ -253,7 +264,7 @@ namespace TDD
             userRepo.Setup(x => x.GetSingleEntity(It.IsAny<Expression<Func<User, bool>>>())).Returns(Task.FromResult(user));
             gameRepo.Setup(x => x.GetSingleEntity(It.IsAny<Expression<Func<Game, bool>>>())).Returns(Task.FromResult(game));
 
-            var guideService = new GuideService(repo.Object, gameRepo.Object, userRepo.Object);
+            var guideService = new GuideService(repo.Object, gameRepo.Object, userRepo.Object, reviewRepo.Object);
             var guideController = new GuideController(guideService);
 
             var result = await guideController.GetGuide(id);

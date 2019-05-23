@@ -16,13 +16,16 @@ namespace Services
     {
         private readonly IRepository<Game> _repo;
         private readonly IRepository<Guide> _guideRepo;
+        private readonly IRepository<GameReview> _reviewRepo;
         private readonly IHostingEnvironment _hostingEnvironment;
 
-        public GameService(IRepository<Game> repo, IRepository<Guide> guideRepo, IHostingEnvironment hostingEnvironment)
+        public GameService(IRepository<Game> repo, IRepository<Guide> guideRepo, IHostingEnvironment hostingEnvironment,
+                            IRepository<GameReview> reviewRepo)
         {
             _repo = repo;
             _guideRepo = guideRepo;
             _hostingEnvironment = hostingEnvironment;
+            _reviewRepo = reviewRepo;
         }
 
         public async Task<ResultDto<BaseDto>> AddGame(GameModel gameModel)
@@ -242,5 +245,69 @@ namespace Services
 
             return path;
         }
+
+        public async Task<ResultDto<BaseDto>> AddReview(ReviewModel reviewModel)
+        {
+            var result = new ResultDto<BaseDto>()
+            {
+                Error = null
+            };
+
+            var oldReview = await _reviewRepo.GetSingleEntity(x => x.GameId == reviewModel.EntityId
+                                                        && x.UserId == reviewModel.UserId);
+
+
+            if (oldReview != null)
+            {
+                if (oldReview.Rating != reviewModel.Rating)
+                {
+                    oldReview.Rating = reviewModel.Rating;
+                    _reviewRepo.Update(oldReview);
+                }
+            }
+            else
+            {
+                var review = new GameReview()
+                {
+                    UserId = reviewModel.UserId,
+                    GameId = reviewModel.EntityId,
+                    Rating = reviewModel.Rating
+                };
+                _reviewRepo.Add(review);
+            }
+
+
+            if (reviewModel.EntityId != 0)
+            {
+                RecalculateGameReview(reviewModel.EntityId);
+            }
+
+            return result;
+        }
+
+        private async void RecalculateGameReview(int gameId)
+        {
+            var reviews = await _reviewRepo.GetAllBy(x => x.GameId == gameId);
+
+            int sum = 0;
+
+            foreach (var review in reviews)
+            {
+                sum += review.Rating;
+            }
+
+            double score = (double)sum / reviews.Count;
+
+            var game = await _repo.GetSingleEntity(x => x.Id == gameId);
+
+            if (game.Rating != score)
+            {
+                game.Rating = score;
+
+                _repo.Update(game);
+            }
+
+        }
+
     }
 }

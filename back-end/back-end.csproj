@@ -11,6 +11,8 @@
     <Compile Remove="Migrations\20190517100931_Review Guide Repair.Designer.cs" />
     <Compile Remove="Migrations\20190517101908_Games.cs" />
     <Compile Remove="Migrations\20190517101908_Games.Designer.cs" />
+    <Compile Remove="Migrations\20190523181520_guideReviews.cs" />
+    <Compile Remove="Migrations\20190523181520_guideReviews.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

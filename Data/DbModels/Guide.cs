@@ -16,5 +16,6 @@ namespace Data.DbModels
 
         public int GameId { get; set; }
         public virtual Game Game { get; set; }
+        public virtual ICollection<GuideReview> GuideReviews { get; set; }
     }
 }

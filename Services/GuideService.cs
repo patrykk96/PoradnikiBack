@@ -15,13 +15,15 @@ namespace Services
         private readonly IRepository<Guide> _guideRepo;
         private readonly IRepository<Game> _gameRepo;
         private readonly IRepository<User> _userRepo;
+        private readonly IRepository<GuideReview> _reviewRepo;
 
         public GuideService(IRepository<Guide> guideRepo, IRepository<Game> gameRepo,
-                            IRepository<User> userRepo)
+                            IRepository<User> userRepo, IRepository<GuideReview> reviewRepo)
         {
             _guideRepo = guideRepo;
             _gameRepo = gameRepo;
             _userRepo = userRepo;
+            _reviewRepo = reviewRepo;
         }
 
         public async Task<ResultDto<BaseDto>> AddGuide(GuideModel guideModel)
@@ -151,7 +153,8 @@ namespace Services
                 Username = user.Username,
                 Name = guide.Name,
                 GameName = game.Name,
-                GameImage = game.Image
+                GameImage = game.Image,
+                Rating = guide.Rating
             };
 
             result.SuccessResult = guideToSend;
@@ -212,7 +215,8 @@ namespace Services
                     Username = user.Username,
                     Name = guide.Name,
                     GameName = game.Name,
-                    GameImage = game.Image
+                    GameImage = game.Image,
+                    Rating = guide.Rating
                 };
 
                 list.Add(g);
@@ -224,6 +228,69 @@ namespace Services
             };
 
             return result;
+        }
+
+        public async Task<ResultDto<BaseDto>> AddReview(ReviewModel reviewModel)
+        {
+            var result = new ResultDto<BaseDto>()
+            {
+                Error = null
+            };
+
+            var oldReview = await _reviewRepo.GetSingleEntity(x => x.GuideId == reviewModel.EntityId
+                                                        && x.UserId == reviewModel.UserId);
+
+
+            if (oldReview != null)
+            {
+                if (oldReview.Rating != reviewModel.Rating)
+                {
+                    oldReview.Rating = reviewModel.Rating;
+                    _reviewRepo.Update(oldReview);
+                }
+            }
+            else
+            {
+                var review = new GuideReview()
+                {
+                    UserId = reviewModel.UserId,
+                    GuideId = reviewModel.EntityId,
+                    Rating = reviewModel.Rating
+                };
+                _reviewRepo.Add(review);
+            }
+
+
+            if (reviewModel.EntityId != 0)
+            {
+                RecalculateGameReview(reviewModel.EntityId);
+            }
+
+            return result;
+        }
+
+        private async void RecalculateGameReview(int guideId)
+        {
+            var reviews = await _reviewRepo.GetAllBy(x => x.GuideId == guideId);
+
+            int sum = 0;
+
+            foreach (var review in reviews)
+            {
+                sum += review.Rating;
+            }
+
+            double score = (double)sum / reviews.Count;
+
+            var guide = await _guideRepo.GetSingleEntity(x => x.Id == guideId);
+
+            if (guide.Rating != score)
+            {
+                guide.Rating = score;
+
+                _guideRepo.Update(guide);
+            }
+
         }
     }
 }

@@ -20,5 +20,6 @@ namespace Data.DbModels
 
         public virtual ICollection<Guide> Guides { get; set; }
         public virtual ICollection<GameReview> GameReviews { get; set; }
+        public virtual ICollection<GuideReview> GuideReviews { get; set; }
     }
 }
