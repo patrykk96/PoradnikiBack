@@ -49,6 +49,14 @@ namespace Services
                 return result;
             }
 
+            bool guideExists = await _guideRepo.Exists(x => x.Name == guideModel.Name);
+
+            if (guideExists)
+            {
+                result.Error = "Podana nazwa jest już w użyciu";
+                return result;
+            }
+
             var guide = new Guide()
             {
                 AuthorId = guideModel.Author,
@@ -92,22 +100,64 @@ namespace Services
                 return result;
             }
 
-            bool gameExists = await _gameRepo.Exists(x => x.Id == guideModel.Game);
+            //bool gameExists = await _gameRepo.Exists(x => x.Id == guideModel.Game);
 
-            if (!gameExists)
+            //if (!gameExists)
+            //{
+            //    result.Error = "Podana gra nie została znaleziona";
+            //    return result;
+            //}
+
+            if (guide.Name != guideModel.Name && guideModel.Name != "null")
             {
-                result.Error = "Podana gra nie została znaleziona";
-                return result;
+                bool guideExists = await _guideRepo.Exists(x => x.Name == guideModel.Name && x.Id != id);
+
+                if (guideExists)
+                {
+                    result.Error = "Podana nazwa jest już w użyciu";
+                    return result;
+                }
+
+                guide.Name = guideModel.Name;
             }
 
-            guide.Name = guideModel.Name;
-            guide.Content = guideModel.Content;
+
+            if (guide.Content != guideModel.Content && guideModel.Content != "null")
+                guide.Content = guideModel.Content;
 
             try
             {
                 _guideRepo.Update(guide);
             }
             catch(Exception e)
+            {
+                result.Error = e.Message;
+            }
+
+            return result;
+        }
+
+
+        public async Task<ResultDto<BaseDto>> DeleteGuide(int id)
+        {
+            var result = new ResultDto<BaseDto>()
+            {
+                Error = null
+            };
+
+            var guide = await _guideRepo.GetSingleEntity(x => x.Id == id);
+
+            if (guide == null)
+            {
+                result.Error = "Nie odnaleziono podanego poradnika";
+                return result;
+            }
+
+            try
+            {
+                _guideRepo.Delete(guide);
+            }
+            catch (Exception e)
             {
                 result.Error = e.Message;
             }

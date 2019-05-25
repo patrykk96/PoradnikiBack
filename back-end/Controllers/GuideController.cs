@@ -57,6 +57,24 @@ namespace back_end.Controllers
             return Ok(result);
         }
 
+        [HttpDelete("deleteGuide/{id}")]
+        public async Task<IActionResult> DeleteGuide(int id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            var result = await _guideService.DeleteGuide(id);
+
+            if (result.Error != null)
+            {
+                return BadRequest(result);
+            }
+
+            return Ok(result);
+        }
+
         [HttpGet("getGuide/{id}")]
         public async Task<IActionResult> GetGuide(int id)
         {
@@ -75,6 +93,7 @@ namespace back_end.Controllers
             return Ok(result);
         }
 
+        [AllowAnonymous]
         [HttpGet("getGuides/{userId}/{gameId}")]
         public async Task<IActionResult> GetGuides(int userId, int gameId)
         {
@@ -103,7 +122,7 @@ namespace back_end.Controllers
 
             var result = await _guideService.AddReview(reviewModel);
 
-            if (result.Error == null)
+            if (result.Error != null)
             {
                 return BadRequest(result);
             }

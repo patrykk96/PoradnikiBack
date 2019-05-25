@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Data.Models;
 using Interfaces;
@@ -106,6 +107,7 @@ namespace back_end.Controllers
             return Ok(result);
         }
 
+        [AllowAnonymous]
         [HttpGet("getGames")]
         public async Task<IActionResult> GetGames()
         {
@@ -114,7 +116,9 @@ namespace back_end.Controllers
                 return BadRequest();
             }
 
-            var result = await _gameService.GetGames();
+            var id = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            if (id == null) id = "0";
+            var result = await _gameService.GetGames(int.Parse(id));
 
             if (result.Error != null)
             {
@@ -125,7 +129,7 @@ namespace back_end.Controllers
         }
 
         [HttpPost("addReview")]
-        public async Task<IActionResult> AddReview(ReviewModel reviewModel)
+        public async Task<IActionResult> AddReview([FromBody]ReviewModel reviewModel)
         {
             if (!ModelState.IsValid)
             {
@@ -134,12 +138,30 @@ namespace back_end.Controllers
 
             var result = await _gameService.AddReview(reviewModel);
 
-            if (result.Error == null)
+            if (result.Error != null)
             {
                 return BadRequest(result);
             }
 
             return Ok(result);
         }
+
+        //[HttpGet("getReview/{userId}/{gameId}")]
+        //public async Task<IActionResult> GetReview(int userId, int gameId)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest();
+        //    }
+
+        //    var result = await _gameService.GetReview(userId, gameId);
+
+        //    if (result.Error != null)
+        //    {
+        //        return BadRequest(result);
+        //    }
+
+        //    return Ok(result);
+        //}
     }
 }

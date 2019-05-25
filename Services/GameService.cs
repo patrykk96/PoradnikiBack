@@ -184,7 +184,7 @@ namespace Services
             return result;
         }
 
-        public async Task<ResultDto<ListGameDto>> GetGames()
+        public async Task<ResultDto<ListGameDto>> GetGames(int id)
         {
             var result = new ResultDto<ListGameDto>()
             {
@@ -198,6 +198,20 @@ namespace Services
             foreach(var game in games)
             {
                 var guides = await _guideRepo.GetAllBy(x => x.GameId == game.Id);
+
+                var review = await _reviewRepo.GetSingleEntity(x => x.UserId == id && x.GameId == game.Id);
+
+                int rating;
+
+                if (review == null)
+                {
+                    rating = 0;
+                }
+                else
+                {
+                    rating = review.Rating;
+                }
+
                 var g = new GameDto()
                 {
                     Id = game.Id,
@@ -205,7 +219,8 @@ namespace Services
                     Image = game.Image,
                     Name = game.Name,
                     Rating = game.Rating,
-                    GuidesCount = guides.Count
+                    GuidesCount = guides.Count,
+                    UserRating = rating
                 };
 
                 gamesToSend.Add(g);
@@ -253,6 +268,13 @@ namespace Services
                 Error = null
             };
 
+            var gameExists = await _repo.Exists(x => x.Id == reviewModel.EntityId);
+
+            if (!gameExists)
+            {
+                result.Error = "Nie odnaleziono gry";
+                return result;
+            }
             var oldReview = await _reviewRepo.GetSingleEntity(x => x.GameId == reviewModel.EntityId
                                                         && x.UserId == reviewModel.UserId);
 
@@ -281,6 +303,31 @@ namespace Services
             {
                 RecalculateGameReview(reviewModel.EntityId);
             }
+
+            return result;
+        }
+
+        public async Task<ResultDto<ReviewDto>> GetReview(int userId, int gameId)
+        {
+            var result = new ResultDto<ReviewDto>()
+            {
+                Error = null
+            };
+
+            var review = await _reviewRepo.GetSingleEntity(x => x.UserId == userId && x.GameId == gameId);
+
+            var r = new ReviewDto();
+
+            if (review == null)
+            {
+                r.Rating = 0;
+            }
+            else
+            {
+                r.Rating = review.Rating;
+            }
+
+            result.SuccessResult = r;
 
             return result;
         }
