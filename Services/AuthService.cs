@@ -1,5 +1,6 @@
 ﻿using Data.DbModels;
 using Data.Dtos;
+using Data.Enums;
 using Data.Models;
 using Interfaces;
 using Microsoft.Extensions.Configuration;
@@ -59,7 +60,8 @@ namespace Services
                 PasswordHash = passwordHash,
                 PasswordSalt = passwordSalt,
                 VerificationCode = Guid.NewGuid(),
-                ConfirmedAccount = false
+                ConfirmedAccount = false,
+                Role = (int)UserRoles.admin
             };
 
             _repo.Add(user);
@@ -157,7 +159,8 @@ namespace Services
             var claims = new[]
                 {
                 new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-                new Claim(ClaimTypes.Name, user.Username)
+                new Claim(ClaimTypes.Name, user.Username),
+                new Claim(ClaimTypes.Role, user.Role.ToString())
                 };
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config.GetSection("AppSettings:Token").Value));

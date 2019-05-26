@@ -258,6 +258,21 @@ namespace Services
                 var user = await _userRepo.GetSingleEntity(x => x.Id == guide.AuthorId);
                 var game = await _gameRepo.GetSingleEntity(x => x.Id == guide.GameId);
 
+                var review = await _reviewRepo.GetSingleEntity(x => x.UserId == user.Id && x.GuideId == guide.Id);
+
+                int rating;
+
+                if (review == null)
+                {
+                    rating = 0;
+                }
+                else
+                {
+                    rating = review.Rating;
+                }
+
+                var reviews = await _reviewRepo.GetAllBy(x => x.GuideId == guide.Id);
+
                 var g = new GuideDto()
                 {
                     Id = guide.Id,
@@ -266,7 +281,9 @@ namespace Services
                     Name = guide.Name,
                     GameName = game.Name,
                     GameImage = game.Image,
-                    Rating = guide.Rating
+                    Rating = guide.Rating,
+                    UserRating = rating,
+                    ReviewCount = reviews.Count
                 };
 
                 list.Add(g);

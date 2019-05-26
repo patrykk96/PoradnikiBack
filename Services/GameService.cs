@@ -99,7 +99,7 @@ namespace Services
             string path = "";
             if (gameModel.Image != null)
             {
-                path = SaveFile(gameModel.Image, gameModel.Name);
+                path = SaveFile(gameModel.Image, game.Name);
             }
 
             if (gameModel.Name != "null")

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Data.Enums;
 using Data.Models;
 using Interfaces;
 using Microsoft.AspNetCore.Authorization;
@@ -27,6 +28,13 @@ namespace back_end.Controllers
             if (!ModelState.IsValid)
             {
                 return BadRequest();
+            }
+
+            var role = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
+
+            if (role != (int)UserRoles.admin)
+            {
+                return Unauthorized();
             }
 
             var gameModel = new GameModel()
@@ -54,6 +62,13 @@ namespace back_end.Controllers
                 return BadRequest();
             }
 
+            var role = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
+
+            if (role != (int)UserRoles.admin)
+            {
+                return Unauthorized();
+            }
+
             var gameModel = new GameModel()
             {
                 Name = name,
@@ -77,6 +92,13 @@ namespace back_end.Controllers
             if (!ModelState.IsValid)
             {
                 return BadRequest();
+            }
+
+            var role = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
+
+            if (role != (int)UserRoles.admin)
+            {
+                return Unauthorized();
             }
 
             var result = await _gameService.DeleteGame(id);
