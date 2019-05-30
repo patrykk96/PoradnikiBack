@@ -210,7 +210,7 @@ namespace Services
 
             List<GameDto> gamesToSend = new List<GameDto>();
 
-            //d
+            //tworze liste gier do zwrocenia
             foreach(var game in games)
             {
                 var guides = await _guideRepo.GetAllBy(x => x.GameId == game.Id);
@@ -252,6 +252,7 @@ namespace Services
             return result;
         }
 
+        //metoda zapisujaca obrazek na dysku
         private string SaveFile(IFormFile image, string name)
         {
             string path = "";
@@ -277,6 +278,7 @@ namespace Services
             return path;
         }
 
+        //metoda dodająca ocene do gry
         public async Task<ResultDto<BaseDto>> AddReview(ReviewModel reviewModel)
         {
             var result = new ResultDto<BaseDto>()
@@ -284,6 +286,7 @@ namespace Services
                 Error = null
             };
 
+            //sprawdzam czy gra istnieje
             var gameExists = await _repo.Exists(x => x.Id == reviewModel.EntityId);
 
             if (!gameExists)
@@ -291,10 +294,12 @@ namespace Services
                 result.Error = "Nie odnaleziono gry";
                 return result;
             }
+            //sprawdzam czy ten użytkownik już dodał recenzje do wybranej gry
             var oldReview = await _reviewRepo.GetSingleEntity(x => x.GameId == reviewModel.EntityId
                                                         && x.UserId == reviewModel.UserId);
 
 
+            //jeśli recenzja już jest, zmieniam jej wartość na nową, w przeciwnym wypadku tworze nowa recenzje
             if (oldReview != null)
             {
                 if (oldReview.Rating != reviewModel.Rating)
@@ -314,7 +319,7 @@ namespace Services
                 _reviewRepo.Add(review);
             }
 
-
+            //po dodaniu/zmianie recenzji przeliczam średnia ocen dla danej gry
             if (reviewModel.EntityId != 0)
             {
                 RecalculateGameReview(reviewModel.EntityId);
@@ -323,33 +328,35 @@ namespace Services
             return result;
         }
 
-        public async Task<ResultDto<ReviewDto>> GetReview(int userId, int gameId)
-        {
-            var result = new ResultDto<ReviewDto>()
-            {
-                Error = null
-            };
+        //public async Task<ResultDto<ReviewDto>> GetReview(int userId, int gameId)
+        //{
+        //    var result = new ResultDto<ReviewDto>()
+        //    {
+        //        Error = null
+        //    };
 
-            var review = await _reviewRepo.GetSingleEntity(x => x.UserId == userId && x.GameId == gameId);
+        //    var review = await _reviewRepo.GetSingleEntity(x => x.UserId == userId && x.GameId == gameId);
 
-            var r = new ReviewDto();
+        //    var r = new ReviewDto();
 
-            if (review == null)
-            {
-                r.Rating = 0;
-            }
-            else
-            {
-                r.Rating = review.Rating;
-            }
+        //    if (review == null)
+        //    {
+        //        r.Rating = 0;
+        //    }
+        //    else
+        //    {
+        //        r.Rating = review.Rating;
+        //    }
 
-            result.SuccessResult = r;
+        //    result.SuccessResult = r;
 
-            return result;
-        }
+        //    return result;
+        //}
 
+            //metoda przeliczajaca srednia ocen
         private async void RecalculateGameReview(int gameId)
         {
+            //biore wszystkie recenzje danej gry
             var reviews = await _reviewRepo.GetAllBy(x => x.GameId == gameId);
 
             int sum = 0;
@@ -358,7 +365,7 @@ namespace Services
             {
                 sum += review.Rating;
             }
-
+            //obliczam średnią i aktualizuję pole
             double score = (double)sum / reviews.Count;
 
             var game = await _repo.GetSingleEntity(x => x.Id == gameId);

@@ -7,6 +7,9 @@ namespace Data.Dtos
 {
     public class UserDto : BaseDto
     {
-       public UserModel User { get; set; }
+        public int Id { get; set; }
+        public string Email { get; set; }
+        public string Username { get; set; }
+        public string Description { get; set; }
     }
 }

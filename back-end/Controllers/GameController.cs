@@ -22,6 +22,7 @@ namespace back_end.Controllers
             _gameService = gameService;
         }
 
+        //do czesci metod w tym kontrolerze dostep ma tylko administrator, w tym celu sprawdzana jest rola w przeslanym tokenie
         [HttpPost("addGame/{name}/{description}")]
         public async Task<IActionResult> AddGame(string name, string description, ImageModel imageModel)
         {

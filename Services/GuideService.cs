@@ -26,6 +26,7 @@ namespace Services
             _reviewRepo = reviewRepo;
         }
 
+        //metoda dodania poradnika
         public async Task<ResultDto<BaseDto>> AddGuide(GuideModel guideModel)
         {
             var result = new ResultDto<BaseDto>()
@@ -33,6 +34,7 @@ namespace Services
                 Error = null
             };
 
+            //sprawdzam czy użytkownik istnieje
             bool userExists = await _userRepo.Exists(x => x.Id == guideModel.Author);
 
             if (!userExists)
@@ -41,6 +43,7 @@ namespace Services
                 return result;
             }
 
+            //sprawdzam czy gra istnieje
             bool gameExists = await _gameRepo.Exists(x => x.Id == guideModel.Game);
 
             if (!gameExists)
@@ -49,6 +52,7 @@ namespace Services
                 return result;
             }
 
+            //sprawdzam czy istnieje poradnik o podanej nazwie
             bool guideExists = await _guideRepo.Exists(x => x.Name == guideModel.Name);
 
             if (guideExists)
@@ -57,6 +61,7 @@ namespace Services
                 return result;
             }
 
+            //tworze nowy poradnik
             var guide = new Guide()
             {
                 AuthorId = guideModel.Author,
@@ -78,6 +83,7 @@ namespace Services
             return result; 
         }
 
+        //metoda edycji poradnika
         public async Task<ResultDto<BaseDto>> UpdateGuide(int id, GuideModel guideModel)
         {
             var result = new ResultDto<BaseDto>()
@@ -85,6 +91,7 @@ namespace Services
                 Error = null
             };
 
+            //sprawdzam czy podany poradnik istnieje
             var guide = await _guideRepo.GetSingleEntity(x => x.Id == id);
 
             if (guide == null)
@@ -93,6 +100,7 @@ namespace Services
                 return result;
             }
 
+            //sprawdzam czy użytkownik istnieje
             bool userExists = await _userRepo.Exists(x => x.Id == guideModel.Author);
 
             if (!userExists)
@@ -101,6 +109,7 @@ namespace Services
                 return result;
             }
 
+            //sprawdzam czy gra istnieje
             bool gameExists = await _gameRepo.Exists(x => x.Id == guideModel.Game);
 
             if (!gameExists)
@@ -109,6 +118,7 @@ namespace Services
                 return result;
             }
 
+            //sprawdzam czy nowa nazwa poradnika nie jest juz w uzyciu
             if (guide.Name != guideModel.Name && guideModel.Name != "null")
             {
                 bool guideExists = await _guideRepo.Exists(x => x.Name == guideModel.Name && x.Id != id);
@@ -126,6 +136,7 @@ namespace Services
             if (guide.Content != guideModel.Content && guideModel.Content != "null")
                 guide.Content = guideModel.Content;
 
+            //aktualizuje poradnik
             try
             {
                 _guideRepo.Update(guide);
@@ -138,7 +149,7 @@ namespace Services
             return result;
         }
 
-
+        //metoda usuniecia poradnika
         public async Task<ResultDto<BaseDto>> DeleteGuide(int id)
         {
             var result = new ResultDto<BaseDto>()
@@ -146,6 +157,7 @@ namespace Services
                 Error = null
             };
 
+            //sprawdzam czy podany poradnik istnieje
             var guide = await _guideRepo.GetSingleEntity(x => x.Id == id);
 
             if (guide == null)
@@ -166,6 +178,7 @@ namespace Services
             return result;
         }
 
+        //metoda zworcenia pojedynczego poradnika
         public async Task<ResultDto<GuideDto>> GetGuide(int id)
         {
             var result = new ResultDto<GuideDto>()
@@ -173,6 +186,7 @@ namespace Services
                 Error = null
             };
 
+            //sprawdzam czy poradnik istnieje
             var guide = await _guideRepo.GetSingleEntity(x => x.Id == id);
 
             if (guide == null)
@@ -181,6 +195,7 @@ namespace Services
                 return result;
             }
 
+            //sprawdzam czy uzytkownik istnieje
             var user = await _userRepo.GetSingleEntity(x => x.Id == guide.AuthorId);
 
             if (user == null)
@@ -189,6 +204,7 @@ namespace Services
                 return result;
             }
 
+            //sprawdzam czy gra istnieje
             var game = await _gameRepo.GetSingleEntity(x => x.Id == guide.GameId);
 
             if (game == null)
@@ -197,6 +213,7 @@ namespace Services
                 return result;
             }
 
+            //zwracam poradnik
             var guideToSend = new GuideDto()
             {
                 Id = guide.Id,
@@ -213,6 +230,7 @@ namespace Services
             return result;
         }
 
+        //metoda pobrania wielu poradników
         public async Task<ResultDto<GuidesDto>> GetGuides(int userId, int gameId)
         {
             var result = new ResultDto<GuidesDto>()
@@ -222,6 +240,8 @@ namespace Services
 
             List<GuideDto> list = new List<GuideDto>();
             List<Guide> guides = new List<Guide>();
+            //jesli niesprecyzowano uzytkownika lub gry, zwraca wszystkie poradniki, jesli jednak podano jedna lub obie dane
+            //wyszukiwane są poradniki spelniajace ten warunek lub warunki
             if (userId == 0 && gameId == 0)
             {
                 guides = await _guideRepo.GetAll();
@@ -254,6 +274,7 @@ namespace Services
                 guides = await _guideRepo.GetAllBy(x => x.GameId == gameId);
             }
 
+            //z uzyskanej listy poradnikow tworzona jest lista do przeslania
             foreach (var guide in guides)
             {
                 var user = await _userRepo.GetSingleEntity(x => x.Id == guide.AuthorId);
@@ -274,9 +295,6 @@ namespace Services
 
                 var reviews = await _reviewRepo.GetAllBy(x => x.GuideId == guide.Id);
 
-                var test = DateTime.Now.ToString();
-
-                var test2 = test.Substring(0,10);
                 var g = new GuideDto()
                 {
                     Id = guide.Id,
@@ -288,7 +306,7 @@ namespace Services
                     Rating = guide.Rating,
                     UserRating = rating,
                     ReviewCount = reviews.Count,
-                    Created = test2
+                    Created = guide.Created.ToString()
                 };
 
                 list.Add(g);
@@ -302,6 +320,7 @@ namespace Services
             return result;
         }
 
+        //metoda dodania oceny do poradnika
         public async Task<ResultDto<BaseDto>> AddReview(ReviewModel reviewModel)
         {
             var result = new ResultDto<BaseDto>()
@@ -309,6 +328,7 @@ namespace Services
                 Error = null
             };
 
+            //sprawdzam czy poradnik istnieje
             var guideExists = await _guideRepo.Exists(x => x.Id == reviewModel.EntityId);
 
             if (!guideExists)
@@ -317,10 +337,11 @@ namespace Services
                 return result;
             }
 
+            //sprawdzam czy użytkownik ocenil juz ten poradnik
             var oldReview = await _reviewRepo.GetSingleEntity(x => x.GuideId == reviewModel.EntityId
                                                         && x.UserId == reviewModel.UserId);
 
-
+            //jesli poradnik jest juz oceniony, zostaje zaktualizowana ocena, w przeciwnym razie zostaje dodana nowa
             if (oldReview != null)
             {
                 if (oldReview.Rating != reviewModel.Rating)
@@ -340,7 +361,7 @@ namespace Services
                 _reviewRepo.Add(review);
             }
 
-
+            //przeliczenie sredniej ocen dla danego poradnika
             if (reviewModel.EntityId != 0)
             {
                 RecalculateGameReview(reviewModel.EntityId);
@@ -349,12 +370,15 @@ namespace Services
             return result;
         }
 
+        //metoda przeliczajaca srednia ocen dla danego poradnika
         private async void RecalculateGameReview(int guideId)
         {
+            //zebranie wszystkich recenzji dla danego poradnika
             var reviews = await _reviewRepo.GetAllBy(x => x.GuideId == guideId);
 
             int sum = 0;
 
+            //obliczenie sredniej
             foreach (var review in reviews)
             {
                 sum += review.Rating;

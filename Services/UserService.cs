@@ -23,6 +23,7 @@ namespace Services
             _hostingEnvironment = hostingEnvironment;
         }
 
+        //metoda zwracajaca uzytkownika
         public async Task<ResultDto<UserDto>> GetUser(int id)
         {
             var result = new ResultDto<UserDto>()
@@ -30,6 +31,7 @@ namespace Services
                 Error = null
             };
 
+            //sprawdzam czy uzytkownik istnieje
             var user = await _repo.GetSingleEntity(x => x.Id == id);
 
             if (user == null)
@@ -38,7 +40,8 @@ namespace Services
                 return result;
             }
 
-            var userToSend = new UserModel()
+            //zwracam użytkownika
+            result.SuccessResult = new UserDto()
             {
                 Id = user.Id,
                 Description = user.Description,
@@ -46,14 +49,10 @@ namespace Services
                 Email = user.Email
             };
 
-            result.SuccessResult = new UserDto
-            {
-                User = userToSend
-            };
-
             return result;
         }
 
+        //edycja użytkownika
         public async Task<ResultDto<BaseDto>> EditUser(UserModel editUserModel)
         {
             var result = new ResultDto<BaseDto>()
@@ -61,6 +60,7 @@ namespace Services
                 Error = null
             };
 
+            //sprawdzam czy taki użytkownik istnieje
             var user = await _repo.GetSingleEntity(x => x.Id == editUserModel.Id);
 
             if (user == null)
@@ -69,6 +69,7 @@ namespace Services
                 return result;
             }
 
+            //sprawdzam czy nowa nazwa nie jest zajeta
             if (user.Username != editUserModel.Username)
             {
                 bool exists = await _repo.Exists(x => x.Username == editUserModel.Username);
@@ -80,6 +81,7 @@ namespace Services
                 }
             }
 
+            //aktualizuje uzytkownika
             user.Username = editUserModel.Username;
             user.Description = editUserModel.Description;
 

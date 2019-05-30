@@ -15,6 +15,6 @@ namespace Interfaces
         Task<ResultDto<GameDto>> GetGame(int id);
         Task<ResultDto<ListGameDto>> GetGames(int id);
         Task<ResultDto<BaseDto>> AddReview(ReviewModel reviewModel);
-        Task<ResultDto<ReviewDto>> GetReview(int userId, int gameId);
+        //Task<ResultDto<ReviewDto>> GetReview(int userId, int gameId);
     }
 }

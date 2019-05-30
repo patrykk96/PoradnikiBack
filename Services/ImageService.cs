@@ -18,6 +18,7 @@ namespace Services
             _hostingEnvironment = hostingEnvironment;
         }
 
+        //metoda zwracajaca wskazany obraz
         public async Task<FileStream> GetImage(string filename)
         {
             var stream = _hostingEnvironment.WebRootPath + "\\uploads\\" + filename;
