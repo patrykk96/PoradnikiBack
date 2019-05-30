@@ -10,6 +10,7 @@ namespace Data.DbModels
         public string Content { get; set; }
         public string Image { get; set; }
         public double Rating { get; set; }
+        public DateTime Created { get; set; }
 
         public int AuthorId { get; set; }
         public virtual User Author { get; set; }

@@ -36,6 +36,7 @@ namespace Services
                 Error = null
             };
 
+            //sprawdzam czy podany mail jest zajęty
             var emailExists = await _repo.Exists(x => x.Email == registerUserModel.Email);
             if (emailExists)
             {
@@ -43,6 +44,7 @@ namespace Services
                 return result;
             }
 
+            //sprawdzam czy podana nazwa użytkownika jest zajęta
             var usernameExists = await _repo.Exists(x => x.Username == registerUserModel.Username);
             if (usernameExists)
             {
@@ -50,9 +52,11 @@ namespace Services
                 return result;
             }
 
+            //generuję hash i salt dla podanego hasła
             byte[] passwordHash, passwordSalt;
             CreatePasswordHash(registerUserModel.Password, out passwordHash, out passwordSalt);
 
+            //tworzę nowego użytkownika
             var user = new User
             {
                 Email = registerUserModel.Email,
@@ -61,15 +65,20 @@ namespace Services
                 PasswordSalt = passwordSalt,
                 VerificationCode = Guid.NewGuid(),
                 ConfirmedAccount = false,
-                Role = (int)UserRoles.admin
+                Role = (int)UserRoles.user
             };
 
             _repo.Add(user);
-            SendConfirmationEmail(user.Email, user.Username, user.VerificationCode);
+            //wysłanie wiadomości email w celu potwierdzenia konta
+            string subject = "Potwierdzenie konta: " + user.Username;
+            string body = "Dzień dobry " + user.Username + "! <br/><br/>" +
+                        "<a href='http://localhost:3000/confirmAccount/" + user.Username + "/" + user.VerificationCode.ToString() + "'>Kliknij w link, aby potwierdzić swoje konto. </a>";
+            SendEmail(user.Email, subject, body);
 
             return result;
         }
 
+        //metoda do wygenerowania hash i salt dla hasla
         private void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
         {
             using (var hmac = new System.Security.Cryptography.HMACSHA512())
@@ -79,21 +88,21 @@ namespace Services
             }
         }
 
-        private void SendConfirmationEmail(string email, string username, Guid code)
+        //metoda wysylajaca wiadomosc email na podany adres, o podanym temacie oraz treści
+        private void SendEmail(string email, string subject, string body)
         {
             using (SmtpClient smtpServer = new SmtpClient("smtp.gmail.com"))
             {
                 using (MailMessage mail = new MailMessage())
                 {
-                    mail.From = new MailAddress("testowymail145@gmail.com");
+                    mail.From = new MailAddress(Environment.GetEnvironmentVariable("email"));
                     mail.To.Add(email);
-                    mail.Subject = "Potwierdzenie konta: " + username;
+                    mail.Subject = subject;
                     mail.IsBodyHtml = true;
-                    mail.Body = "Dzień dobry " + username + "! <br/><br/>" +
-                        "<a href='http://localhost:3000/confirmAccount/" + username + "/" + code.ToString() + "'>Kliknij w link, aby potwierdzić swoje konto. </a>";
+                    mail.Body = body;
 
                     smtpServer.Port = 587;
-                    smtpServer.Credentials = new NetworkCredential("testowymail145@gmail.com", "testowehaslo135");
+                    smtpServer.Credentials = new NetworkCredential(Environment.GetEnvironmentVariable("email"), Environment.GetEnvironmentVariable("haslo"));
                     smtpServer.EnableSsl = true;
 
                     smtpServer.Send(mail);
@@ -101,7 +110,7 @@ namespace Services
             };
         }
 
-
+        //metoda sprawdzająca czy użytkownik istnieje
         public async Task<bool> UserExists(string username)
         {
             if (await _repo.Exists(x => x.Username == username))
@@ -109,6 +118,7 @@ namespace Services
             return false;
         }
 
+        //metoda logowania
         public async Task<ResultDto<LoginDto>> Login(LoginUserModel loginUserModel)
         {
             var result = new ResultDto<LoginDto>
@@ -116,6 +126,7 @@ namespace Services
                 Error = null
             };
 
+            //sprawdzam czy użytkownik istnieje
             var user = await _repo.GetSingleEntity(x => x.Username == loginUserModel.Username);
 
             if (user == null || !VerifyPasswordHash(loginUserModel.Password, user.PasswordHash, user.PasswordSalt))
@@ -124,12 +135,14 @@ namespace Services
                 return result;
             }
 
+            //sprawdzam czy konto zostało potwierdzone
             if (!user.ConfirmedAccount)
             {
                 result.Error = "Konto niezatwierdzone. Sprawdź swój email";
                 return result;
             }
 
+            //jesli wszystko ok tworze token i go zwracam
             var token = GenerateToken(user);
 
             result.SuccessResult = new LoginDto()
@@ -141,6 +154,8 @@ namespace Services
             return result;
         }
 
+        //Metoda pozwalajaca na sprawdzenie poprawnosci hasla poprzez wygenerowanie hashu z pomocą saltu z bazy
+        //Jesli nowy hash zgadza sie ze starym z bazy to haslo poprawne
         private bool VerifyPasswordHash(string password, byte[] passwordHash, byte[] passwordSalt)
         {
             using (var hmac = new System.Security.Cryptography.HMACSHA512(passwordSalt))
@@ -154,6 +169,7 @@ namespace Services
             }
         }
 
+        //metoda generujaca token uwierzytelniajacy
         private string GenerateToken(User user)
         {
             var claims = new[]
@@ -182,6 +198,7 @@ namespace Services
             return token;
         }
 
+        //metoda zatwierdzająca konto po otrzymaniu wiadomosci email
         public async Task<ResultDto<BaseDto>> ConfirmEmail(string username, string code)
         {
             var result = new ResultDto<BaseDto>()
@@ -189,6 +206,7 @@ namespace Services
                 Error = null
             };
 
+            //sprawdzam czy taki użytkownik istnieje
             var user = await _repo.GetSingleEntity(x => x.Username == username);
             
             if (user == null)
@@ -197,6 +215,7 @@ namespace Services
                 return result;
             }
 
+            //zatwierdzam konto
             if (user.VerificationCode.ToString() == code && !user.ConfirmedAccount)
             {
                 user.ConfirmedAccount = true;
@@ -209,6 +228,7 @@ namespace Services
             return result;
         }
 
+        //Metoda pozwalająca na zmiane hasła, wyśle wiadomość email z linkiem resetującym
         public async Task<ResultDto<BaseDto>> ResetPassword(string email)
         {
             var result = new ResultDto<BaseDto>()
@@ -224,33 +244,23 @@ namespace Services
                 return result;
             }
 
+            //tworzę nowy kod weryfikacyjny który posłuży do utworzenia linku resetującego
             user.VerificationCode = Guid.NewGuid();
             var code = user.VerificationCode;
 
             _repo.Update(user);
 
-            using (SmtpClient smtpServer = new SmtpClient("smtp.gmail.com"))
-            {
-                using (MailMessage mail = new MailMessage())
-                {
-                    mail.From = new MailAddress("testowymail145@gmail.com");
-                    mail.To.Add(email);
-                    mail.Subject = "Zmiana hasła konta: " + user.Username;
-                    mail.IsBodyHtml = true;
-                    mail.Body = "Dzień dobry " + user.Username + "! <br/><br/>" +
-                        "<a href='http://localhost:3000/changePassword/" + user.Username + "/" + code.ToString() + "'>Kliknij w link, aby ustawić nowe hasło. </a>";
+            //tworzę wiadomość email z linkiem resetującym
+            string subject = "Zmiana hasła konta: " + user.Username;
+            string body = "Dzień dobry " + user.Username + "! <br/><br/>" +
+                        "<a href='http://localhost:3000/changePassword/" + user.Username + "/" + user.VerificationCode.ToString() + "'>Kliknij w link, aby ustawić nowe hasło. </a>";
 
-                    smtpServer.Port = 587;
-                    smtpServer.Credentials = new NetworkCredential("testowymail145@gmail.com", "testowehaslo135");
-                    smtpServer.EnableSsl = true;
-
-                    smtpServer.Send(mail);
-                };
-            };
+            SendEmail(user.Email, subject, body);
 
             return result;
         }
 
+        //metoda ustawiająca nowe hasło po zresetowaniu starego
         public async Task<ResultDto<BaseDto>> SetNewPassword(string username, string code, string newPassword)
         {
             var result = new ResultDto<BaseDto>()
@@ -266,6 +276,7 @@ namespace Services
                 return result;
             }
 
+            //jesli nie ma bledow ustawiam nowe haslo
             if (user.VerificationCode.ToString() == code && user.ConfirmedAccount)
             {
                 byte[] passwordHash, passwordSalt;
@@ -282,6 +293,7 @@ namespace Services
             return result;
         }
 
+        //logowanie za pomocą facebook
         public async Task<ResultDto<LoginDto>> FacebookLogin(string fbToken, string id)
         {
             var result = new ResultDto<LoginDto>()
@@ -311,13 +323,16 @@ namespace Services
             };
 
             var epInfo = JsonConvert.DeserializeObject<Dictionary<string, string>>(responseResult);
-            var users = await _repo.GetAllBy(x => x.LoginProvider == "facebook");
-            var user = await _repo.GetSingleEntity(x => x.ProviderKey == epInfo["id"]);
+            //sprawdzam czy logujący się użytkownik już sie logował wczesniej
+            var user = await _repo.GetSingleEntity(x => x.LoginProvider == "facebook" && x.ProviderKey == epInfo["id"]);
 
+            //jesli sie nie logowal
             if (user == null)
             {
+                //sprawdzam czy jego mail juz jest w bazie
                 user = await _repo.GetSingleEntity(x => x.Email == epInfo["email"]);
 
+                //jesli nie tworze nowe konto 
                 if (user == null)
                 {
                     var username = string.Format("FB{0}{1}",
@@ -325,7 +340,7 @@ namespace Services
                           Guid.NewGuid().ToString("N")
                       );
 
-                    var password = "123456";
+                    var password = Guid.NewGuid().ToString();
                     byte[] passwordHash, passwordSalt;
 
                     CreatePasswordHash(password, out passwordHash, out passwordSalt);
@@ -344,6 +359,7 @@ namespace Services
                     _repo.Add(user);
                 }
 
+                //jesli juz jest w bazie, dodaje informacje o facebook
                 user.LoginProvider = "facebook";
                 user.ProviderKey = epInfo["id"];
 
@@ -361,6 +377,7 @@ namespace Services
                 var u = _repo.GetSingleEntity(x => x.Email == epInfo["email"]);
                 num = u.Id;
             }
+            //tworze token jwt
             var token = GenerateToken(user);
 
             result.SuccessResult = new LoginDto()
@@ -372,6 +389,7 @@ namespace Services
             return result;
         }
 
+        //metoda zmiany hasla
         public async Task<ResultDto<BaseDto>> ChangePassword(ChangePasswordModel changePasswordModel)
         {
             var result = new ResultDto<BaseDto>()
@@ -381,12 +399,14 @@ namespace Services
 
             var user = await _repo.GetSingleEntity(x => x.Id == changePasswordModel.Id);
 
+            //sprawdzam czy uzytkownik istnieje
             if (user == null)
             {
                 result.Error = "Nie znaleziono użytkownika";
                 return result;
             }
 
+            //sprawdzam czy stare haslo podane jest poprawne
             if (!VerifyPasswordHash(changePasswordModel.OldPassword, user.PasswordHash, user.PasswordSalt))
             {
                 result.Error = "Stare hasło jest niepoprawne";
@@ -403,5 +423,6 @@ namespace Services
 
             return result;
         }
+
     }
 }

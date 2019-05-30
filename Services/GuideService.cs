@@ -62,7 +62,8 @@ namespace Services
                 AuthorId = guideModel.Author,
                 Content = guideModel.Content,
                 GameId = guideModel.Game,
-                Name = guideModel.Name
+                Name = guideModel.Name,
+                Created = DateTime.Now
             };
 
             try
@@ -100,13 +101,13 @@ namespace Services
                 return result;
             }
 
-            //bool gameExists = await _gameRepo.Exists(x => x.Id == guideModel.Game);
+            bool gameExists = await _gameRepo.Exists(x => x.Id == guideModel.Game);
 
-            //if (!gameExists)
-            //{
-            //    result.Error = "Podana gra nie została znaleziona";
-            //    return result;
-            //}
+            if (!gameExists)
+            {
+                result.Error = "Podana gra nie została znaleziona";
+                return result;
+            }
 
             if (guide.Name != guideModel.Name && guideModel.Name != "null")
             {
@@ -273,6 +274,9 @@ namespace Services
 
                 var reviews = await _reviewRepo.GetAllBy(x => x.GuideId == guide.Id);
 
+                var test = DateTime.Now.ToString();
+
+                var test2 = test.Substring(0,10);
                 var g = new GuideDto()
                 {
                     Id = guide.Id,
@@ -283,7 +287,8 @@ namespace Services
                     GameImage = game.Image,
                     Rating = guide.Rating,
                     UserRating = rating,
-                    ReviewCount = reviews.Count
+                    ReviewCount = reviews.Count,
+                    Created = test2
                 };
 
                 list.Add(g);
@@ -303,6 +308,14 @@ namespace Services
             {
                 Error = null
             };
+
+            var guideExists = await _guideRepo.Exists(x => x.Id == reviewModel.EntityId);
+
+            if (!guideExists)
+            {
+                result.Error = "Nie odnaleziono poradnika";
+                return result;
+            }
 
             var oldReview = await _reviewRepo.GetSingleEntity(x => x.GuideId == reviewModel.EntityId
                                                         && x.UserId == reviewModel.UserId);

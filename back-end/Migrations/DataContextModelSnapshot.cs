@@ -63,6 +63,8 @@ namespace back_end.Migrations
 
                     b.Property<string>("Content");
 
+                    b.Property<DateTime>("Created");
+
                     b.Property<int>("GameId");
 
                     b.Property<string>("Image");

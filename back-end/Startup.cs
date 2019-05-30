@@ -55,8 +55,8 @@ namespace back_end
                 })
                 .AddFacebook(opts =>
                 {
-                    opts.AppId = Configuration["AppSettings:Facebook:AppId"];
-                    opts.AppSecret = Configuration["AppSettings:Facebook:AppSecret"];
+                    opts.AppId = Environment.GetEnvironmentVariable("appId");
+                    opts.AppSecret = Environment.GetEnvironmentVariable("appSecret");
                 });
             services.AddSwaggerGen(c =>
             {

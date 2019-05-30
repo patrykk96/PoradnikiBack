@@ -126,7 +126,7 @@ namespace back_end.Controllers
                 return BadRequest(ModelState);
             }
 
-            var result = await _authService.FacebookLogin(externalLoginModel.access_token, externalLoginModel.client_id);
+            var result = await _authService.FacebookLogin(externalLoginModel.AccessToken, externalLoginModel.Id);
 
             if (result.Error != null)
             {

@@ -30,7 +30,7 @@ namespace back_end.Controllers
                 return BadRequest();
             }
 
-            var role = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
+            var role = int.Parse(User.FindFirst(ClaimTypes.Role)?.Value);
 
             if (role != (int)UserRoles.admin)
             {
@@ -62,7 +62,7 @@ namespace back_end.Controllers
                 return BadRequest();
             }
 
-            var role = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
+            var role = int.Parse(User.FindFirst(ClaimTypes.Role)?.Value);
 
             if (role != (int)UserRoles.admin)
             {
@@ -94,7 +94,7 @@ namespace back_end.Controllers
                 return BadRequest();
             }
 
-            var role = int.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
+            var role = int.Parse(User.FindFirst(ClaimTypes.Role)?.Value);
 
             if (role != (int)UserRoles.admin)
             {

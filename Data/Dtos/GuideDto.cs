@@ -15,5 +15,6 @@ namespace Data.Dtos
         public double Rating { get; set; }
         public int UserRating { get; set; }
         public int ReviewCount { get; set; }
+        public string Created { get; set; }
     }
 }

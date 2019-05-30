@@ -273,5 +273,60 @@ namespace TDD
 
             Assert.Null(ResultValue.Error);
         }
+
+        [Fact]
+        public async void ShouldNotAddReviewIfGuideNotFound()
+        {
+            var reviewModel = new ReviewModel()
+            {
+                EntityId = 1,
+                Rating = 1,
+                UserId = 1
+            };
+            var repo = new Mock<IRepository<Guide>>();
+            var gameRepo = new Mock<IRepository<Game>>();
+            var userRepo = new Mock<IRepository<User>>();
+            var reviewRepo = new Mock<IRepository<GuideReview>>();
+            repo.Setup(x => x.Exists(It.IsAny<Expression<Func<Guide, bool>>>())).Returns(Task.FromResult(false));
+
+            var guideService = new GuideService(repo.Object, gameRepo.Object, userRepo.Object, reviewRepo.Object);
+            var guideController = new GuideController(guideService);
+
+            var result = await guideController.AddReview(reviewModel);
+            var badRequest = Assert.IsType<BadRequestObjectResult>(result);
+            var errorResult = Assert.IsAssignableFrom<ResultDto<BaseDto>>(badRequest.Value);
+
+            string error = "Nie odnaleziono poradnika";
+            Assert.Contains(error, errorResult.Error);
+        }
+
+        [Fact]
+        public async void ShouldAddReviewIfDataCorrect()
+        {
+            var reviewModel = new ReviewModel()
+            {
+                EntityId = 1,
+                Rating = 1,
+                UserId = 1
+            };
+            var list = new List<GuideReview>();
+            var guide = new Guide();
+            var repo = new Mock<IRepository<Guide>>();
+            var gameRepo = new Mock<IRepository<Game>>();
+            var userRepo = new Mock<IRepository<User>>();
+            var reviewRepo = new Mock<IRepository<GuideReview>>();
+            reviewRepo.Setup(x => x.GetAllBy(It.IsAny<Expression<Func<GuideReview, bool>>>())).Returns(Task.FromResult(list));
+            repo.Setup(x => x.GetSingleEntity(It.IsAny<Expression<Func<Guide, bool>>>())).Returns(Task.FromResult(guide));
+            repo.Setup(x => x.Exists(It.IsAny<Expression<Func<Guide, bool>>>())).Returns(Task.FromResult(true));
+            
+
+            var guideService = new GuideService(repo.Object, gameRepo.Object, userRepo.Object, reviewRepo.Object);
+            var guideController = new GuideController(guideService);
+
+            var result = await guideController.AddReview(reviewModel);
+            var OkResult = Assert.IsType<OkObjectResult>(result);
+            var ResultValue = Assert.IsAssignableFrom<ResultDto<BaseDto>>(OkResult.Value);
+            Assert.Null(ResultValue.Error);
+        }
     }
 }

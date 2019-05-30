@@ -6,7 +6,7 @@ namespace Data.Models
 {
     public class ExternalLoginModel
     {
-        public string access_token { get; set; }
-        public string client_id { get; set; }
+        public string AccessToken { get; set; }
+        public string Id { get; set; }
     }
 }

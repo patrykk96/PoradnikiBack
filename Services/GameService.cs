@@ -28,6 +28,7 @@ namespace Services
             _reviewRepo = reviewRepo;
         }
 
+        //metoda dodania gry
         public async Task<ResultDto<BaseDto>> AddGame(GameModel gameModel)
         {
             var result = new ResultDto<BaseDto>()
@@ -35,6 +36,8 @@ namespace Services
                 Error = null
             };
 
+
+            //sprawdzam czy gra o podanej nazwie istnieje
             bool exists = await _repo.Exists(x => x.Name == gameModel.Name);
 
             if (exists)
@@ -43,6 +46,7 @@ namespace Services
                 return result;
             }
 
+            //Jesli zostal dodany obrazek zapisuje go
             string path = null;
 
             if (gameModel.Image != null)
@@ -50,6 +54,7 @@ namespace Services
                 path = SaveFile(gameModel.Image, gameModel.Name);
             }
 
+            //tworze gre i zapisuje w bazie danych
             var game = new Game()
             {
                 Name = gameModel.Name,
@@ -77,6 +82,7 @@ namespace Services
                 Error = null
             };
 
+            //sprawdzam czy podana gra istnieje
             var game = await _repo.GetSingleEntity(x => x.Id == id);
 
             if (game == null)
@@ -85,6 +91,7 @@ namespace Services
                 return result;
             }
 
+            //Jeśli nazwa jest nowa, sprawdzam czy inna gra już jej nie ma
             if (game.Name != gameModel.Name)
             {
                 bool exists = await _repo.Exists(x => x.Name == gameModel.Name);
@@ -96,12 +103,14 @@ namespace Services
                 }
             }
 
+            //Jesli zmieniono obrazek, zapisuje go
             string path = "";
             if (gameModel.Image != null)
             {
                 path = SaveFile(gameModel.Image, game.Name);
             }
 
+            //edycja gry
             if (gameModel.Name != "null")
             {
                 game.Name = gameModel.Name;
@@ -125,6 +134,7 @@ namespace Services
             return result;
         }
 
+        //usuwanie gry
         public async Task<ResultDto<BaseDto>> DeleteGame(int id)
         {
             var result = new ResultDto<BaseDto>()
@@ -152,6 +162,7 @@ namespace Services
             return result;
         }
 
+        //pobranie pojedynczej gry
         public async Task<ResultDto<GameDto>> GetGame(int id)
         {
             var result = new ResultDto<GameDto>()
@@ -159,6 +170,7 @@ namespace Services
                 Error = null
             };
 
+            //probuje uzyskac wskazana gre
             var game = await _repo.GetSingleEntity(x => x.Id == id);
 
             if (game == null)
@@ -167,8 +179,10 @@ namespace Services
                 return result;
             }
 
+            //wyciagniecie listy poradnikow do podanej gry w celu ich podliczenia
             var guides = await _guideRepo.GetAllBy(x => x.GameId == id);
 
+            //tworze obiekt z gra i zwracam go
             var gameToSend = new GameDto()
             {
                 Id = game.Id,
@@ -184,6 +198,7 @@ namespace Services
             return result;
         }
 
+        //zwrócenie listy gier
         public async Task<ResultDto<ListGameDto>> GetGames(int id)
         {
             var result = new ResultDto<ListGameDto>()
@@ -195,6 +210,7 @@ namespace Services
 
             List<GameDto> gamesToSend = new List<GameDto>();
 
+            //d
             foreach(var game in games)
             {
                 var guides = await _guideRepo.GetAllBy(x => x.GameId == game.Id);

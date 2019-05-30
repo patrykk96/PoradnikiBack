@@ -15169,9 +15169,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Patryk\\Documents\\GitHub\\PoradnikiBack\\TDD\\TDD.csproj",
-      "projectName": "TDD",
-      "projectPath": "C:\\Users\\Patryk\\Documents\\GitHub\\PoradnikiBack\\TDD\\TDD.csproj",
+      "projectUniqueName": "C:\\Users\\Patryk\\Documents\\GitHub\\PoradnikiBack\\TDD\\Tests.csproj",
+      "projectName": "Tests",
+      "projectPath": "C:\\Users\\Patryk\\Documents\\GitHub\\PoradnikiBack\\TDD\\Tests.csproj",
       "packagesPath": "C:\\Users\\Patryk\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\Patryk\\Documents\\GitHub\\PoradnikiBack\\TDD\\obj\\",
       "projectStyle": "PackageReference",
